@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "967328115163",
-    "project_id": "top300-bkkvg5",
-    "storage_bucket": "top300-bkkvg5.firebasestorage.app"
+    "project_number": "813008875330",
+    "project_id": "top300-rtdipu",
+    "storage_bucket": "top300-rtdipu.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:967328115163:android:c854255e706b8e37dc1ffe",
+        "mobilesdk_app_id": "1:813008875330:android:4aed2d35617edc9946a2db",
         "android_client_info": {
           "package_name": "com.mycompany.top300"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCy-Ien5WinWfqOdG24h84nemSLkhIDz4s"
+          "current_key": "AIzaSyBIhaTAAKZQtzmhFfhsVAfg61HAkwgzQQw"
         }
       ],
       "services": {
