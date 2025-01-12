@@ -6,6 +6,9 @@ import '../flutter_flow/flutter_flow_util.dart';
 import 'schema/util/firestore_util.dart';
 
 import 'schema/tiendas_record.dart';
+import 'schema/top300_record.dart';
+import 'schema/controles_record.dart';
+import 'schema/t3608_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -15,6 +18,9 @@ export 'schema/util/firestore_util.dart';
 export 'schema/util/schema_util.dart';
 
 export 'schema/tiendas_record.dart';
+export 'schema/top300_record.dart';
+export 'schema/controles_record.dart';
+export 'schema/t3608_record.dart';
 
 /// Functions to query TiendasRecords (as a Stream and as a Future).
 Future<int> queryTiendasRecordCount({
@@ -48,6 +54,117 @@ Future<List<TiendasRecord>> queryTiendasRecordOnce({
     queryCollectionOnce(
       TiendasRecord.collection,
       TiendasRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query Top300Records (as a Stream and as a Future).
+Future<int> queryTop300RecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      Top300Record.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<Top300Record>> queryTop300Record({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      Top300Record.collection,
+      Top300Record.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<Top300Record>> queryTop300RecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      Top300Record.collection,
+      Top300Record.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query ControlesRecords (as a Stream and as a Future).
+Future<int> queryControlesRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      ControlesRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<ControlesRecord>> queryControlesRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      ControlesRecord.collection,
+      ControlesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<ControlesRecord>> queryControlesRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      ControlesRecord.collection,
+      ControlesRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query T3608Records (as a Stream and as a Future).
+Future<int> queryT3608RecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      T3608Record.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<T3608Record>> queryT3608Record({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      T3608Record.collection,
+      T3608Record.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<T3608Record>> queryT3608RecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      T3608Record.collection,
+      T3608Record.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,

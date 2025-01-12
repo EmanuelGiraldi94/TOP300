@@ -17,10 +17,13 @@ class FFAppState extends ChangeNotifier {
   Future initializePersistedState() async {
     prefs = await SharedPreferences.getInstance();
     _safeInit(() {
-      _numeroTienda = prefs.getString('ff_numeroTienda') ?? _numeroTienda;
+      _contrasea = prefs.getString('ff_contrasea') ?? _contrasea;
     });
     _safeInit(() {
-      _contrasea = prefs.getString('ff_contrasea') ?? _contrasea;
+      _TiendaNum = prefs.getString('ff_TiendaNum') ?? _TiendaNum;
+    });
+    _safeInit(() {
+      _numeroTienda = prefs.getInt('ff_numeroTienda') ?? _numeroTienda;
     });
   }
 
@@ -31,18 +34,31 @@ class FFAppState extends ChangeNotifier {
 
   late SharedPreferences prefs;
 
-  String _numeroTienda = '';
-  String get numeroTienda => _numeroTienda;
-  set numeroTienda(String value) {
-    _numeroTienda = value;
-    prefs.setString('ff_numeroTienda', value);
-  }
-
   String _contrasea = '';
   String get contrasea => _contrasea;
   set contrasea(String value) {
     _contrasea = value;
     prefs.setString('ff_contrasea', value);
+  }
+
+  String _Cpunt = '';
+  String get Cpunt => _Cpunt;
+  set Cpunt(String value) {
+    _Cpunt = value;
+  }
+
+  String _TiendaNum = '';
+  String get TiendaNum => _TiendaNum;
+  set TiendaNum(String value) {
+    _TiendaNum = value;
+    prefs.setString('ff_TiendaNum', value);
+  }
+
+  int _numeroTienda = 0;
+  int get numeroTienda => _numeroTienda;
+  set numeroTienda(int value) {
+    _numeroTienda = value;
+    prefs.setInt('ff_numeroTienda', value);
   }
 }
 

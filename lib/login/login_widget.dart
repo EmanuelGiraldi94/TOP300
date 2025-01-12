@@ -33,7 +33,7 @@ class _LoginWidgetState extends State<LoginWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      if ((FFAppState().numeroTienda != '') &&
+      if ((FFAppState().TiendaNum != '') &&
           (FFAppState().contrasea != '')) {
         context.pushNamed('Home');
       }
@@ -110,15 +110,12 @@ class _LoginWidgetState extends State<LoginWidget>
               child: Container(
                 width: 100.0,
                 height: double.infinity,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [
-                      FlutterFlowTheme.of(context).primaryText,
-                      const Color(0xFF88919D)
-                    ],
-                    stops: const [0.0, 1.0],
-                    begin: const AlignmentDirectional(0.87, -1.0),
-                    end: const AlignmentDirectional(-0.87, 1.0),
+                    colors: [Color(0xFF0B0B0B), Color(0xFF88919D)],
+                    stops: [0.0, 1.0],
+                    begin: AlignmentDirectional(0.87, -1.0),
+                    end: AlignmentDirectional(-0.87, 1.0),
                   ),
                 ),
                 alignment: const AlignmentDirectional(0.0, -1.0),
@@ -185,6 +182,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                         .displaySmall
                                         .override(
                                           fontFamily: 'Inter Tight',
+                                          color: const Color(0xFF0B0B0B),
                                           letterSpacing: 0.0,
                                         ),
                                   ),
@@ -404,10 +402,13 @@ class _LoginWidgetState extends State<LoginWidget>
                                           singleRecord: true,
                                         ).then((s) => s.firstOrNull);
                                         if (_model.tiendasa != null) {
-                                          FFAppState().numeroTienda = _model
-                                              .emailAddressTextController.text;
                                           FFAppState().contrasea = _model
                                               .passwordTextController.text;
+                                          FFAppState().TiendaNum = _model
+                                              .emailAddressTextController.text;
+                                          FFAppState().numeroTienda = int.parse(
+                                              _model.emailAddressTextController
+                                                  .text);
                                           FFAppState().update(() {});
 
                                           context.pushNamed('Home');

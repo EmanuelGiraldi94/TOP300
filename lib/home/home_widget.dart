@@ -58,7 +58,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                   size: 30.0,
                 ),
                 onPressed: () async {
-                  context.pop();
+                  FFAppState().TiendaNum = '';
+                  FFAppState().contrasea = '';
+                  safeSetState(() {});
+                  context.safePop();
                 },
               ),
             ),
@@ -324,6 +327,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                           ],
                         ),
                       ),
+                      Container(
+                        height: 200.0,
+                      ),
                     ],
                   ),
                 ),
@@ -333,8 +339,8 @@ class _HomeWidgetState extends State<HomeWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   FFButtonWidget(
-                    onPressed: () {
-                      print('Button pressed ...');
+                    onPressed: () async {
+                      context.pushNamed('Control');
                     },
                     text: 'Crear nuevo control',
                     options: FFButtonOptions(
