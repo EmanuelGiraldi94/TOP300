@@ -60,6 +60,18 @@ class FFAppState extends ChangeNotifier {
     _numeroTienda = value;
     prefs.setInt('ff_numeroTienda', value);
   }
+
+  Color _Green = const Color(0xffffffff);
+  Color get Green => _Green;
+  set Green(Color value) {
+    _Green = value;
+  }
+
+  Color _Red = const Color(0xffffffff);
+  Color get Red => _Red;
+  set Red(Color value) {
+    _Red = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {
@@ -72,4 +84,11 @@ Future _safeInitAsync(Function() initializeField) async {
   try {
     await initializeField();
   } catch (_) {}
+}
+
+Color? _colorFromIntValue(int? val) {
+  if (val == null) {
+    return null;
+  }
+  return Color(val);
 }

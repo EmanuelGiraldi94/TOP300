@@ -45,6 +45,11 @@ class T3608Record extends FirestoreRecord {
   int get iDcontrol => _iDcontrol ?? 0;
   bool hasIDcontrol() => _iDcontrol != null;
 
+  // "Color" field.
+  bool? _color;
+  bool get color => _color ?? false;
+  bool hasColor() => _color != null;
+
   void _initializeFields() {
     _departamento = castToType<int>(snapshotData['Departamento']);
     _producto = snapshotData['Producto'] as String?;
@@ -52,6 +57,7 @@ class T3608Record extends FirestoreRecord {
     _tienda = castToType<int>(snapshotData['Tienda']);
     _stock = snapshotData['Stock'] as String?;
     _iDcontrol = castToType<int>(snapshotData['IDcontrol']);
+    _color = snapshotData['Color'] as bool?;
   }
 
   static CollectionReference get collection =>
@@ -94,6 +100,7 @@ Map<String, dynamic> createT3608RecordData({
   int? tienda,
   String? stock,
   int? iDcontrol,
+  bool? color,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -103,6 +110,7 @@ Map<String, dynamic> createT3608RecordData({
       'Tienda': tienda,
       'Stock': stock,
       'IDcontrol': iDcontrol,
+      'Color': color,
     }.withoutNulls,
   );
 
@@ -119,7 +127,8 @@ class T3608RecordDocumentEquality implements Equality<T3608Record> {
         e1?.sku == e2?.sku &&
         e1?.tienda == e2?.tienda &&
         e1?.stock == e2?.stock &&
-        e1?.iDcontrol == e2?.iDcontrol;
+        e1?.iDcontrol == e2?.iDcontrol &&
+        e1?.color == e2?.color;
   }
 
   @override
@@ -129,7 +138,8 @@ class T3608RecordDocumentEquality implements Equality<T3608Record> {
         e?.sku,
         e?.tienda,
         e?.stock,
-        e?.iDcontrol
+        e?.iDcontrol,
+        e?.color
       ]);
 
   @override

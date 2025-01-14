@@ -3,6 +3,7 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/custom_code/actions/index.dart' as actions;
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -33,6 +34,8 @@ class _LoginWidgetState extends State<LoginWidget>
 
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
+      setDarkModeSetting(context, ThemeMode.light);
+      await actions.lockOrientation();
       if ((FFAppState().TiendaNum != '') &&
           (FFAppState().contrasea != '')) {
         context.pushNamed('Home');
@@ -209,7 +212,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                         controller:
                                             _model.emailAddressTextController,
                                         focusNode: _model.emailAddressFocusNode,
-                                        autofocus: true,
+                                        autofocus: false,
                                         autofillHints: const [AutofillHints.email],
                                         obscureText: false,
                                         decoration: InputDecoration(
@@ -290,7 +293,7 @@ class _LoginWidgetState extends State<LoginWidget>
                                         controller:
                                             _model.passwordTextController,
                                         focusNode: _model.passwordFocusNode,
-                                        autofocus: true,
+                                        autofocus: false,
                                         autofillHints: const [AutofillHints.password],
                                         obscureText: !_model.passwordVisibility,
                                         decoration: InputDecoration(

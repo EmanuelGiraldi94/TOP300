@@ -40,12 +40,18 @@ class Top300Record extends FirestoreRecord {
   String get stock => _stock ?? '';
   bool hasStock() => _stock != null;
 
+  // "Color" field.
+  int? _color;
+  int get color => _color ?? 0;
+  bool hasColor() => _color != null;
+
   void _initializeFields() {
     _departamento = castToType<int>(snapshotData['Departamento']);
     _tienda = castToType<int>(snapshotData['Tienda']);
     _sku = castToType<int>(snapshotData['SKU']);
     _producto = snapshotData['Producto'] as String?;
     _stock = snapshotData['Stock'] as String?;
+    _color = castToType<int>(snapshotData['Color']);
   }
 
   static CollectionReference get collection =>
@@ -87,6 +93,7 @@ Map<String, dynamic> createTop300RecordData({
   int? sku,
   String? producto,
   String? stock,
+  int? color,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -95,6 +102,7 @@ Map<String, dynamic> createTop300RecordData({
       'SKU': sku,
       'Producto': producto,
       'Stock': stock,
+      'Color': color,
     }.withoutNulls,
   );
 
@@ -110,12 +118,13 @@ class Top300RecordDocumentEquality implements Equality<Top300Record> {
         e1?.tienda == e2?.tienda &&
         e1?.sku == e2?.sku &&
         e1?.producto == e2?.producto &&
-        e1?.stock == e2?.stock;
+        e1?.stock == e2?.stock &&
+        e1?.color == e2?.color;
   }
 
   @override
-  int hash(Top300Record? e) => const ListEquality()
-      .hash([e?.departamento, e?.tienda, e?.sku, e?.producto, e?.stock]);
+  int hash(Top300Record? e) => const ListEquality().hash(
+      [e?.departamento, e?.tienda, e?.sku, e?.producto, e?.stock, e?.color]);
 
   @override
   bool isValidKey(Object? o) => o is Top300Record;

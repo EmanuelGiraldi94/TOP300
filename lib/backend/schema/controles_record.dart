@@ -20,20 +20,20 @@ class ControlesRecord extends FirestoreRecord {
   int get tienda => _tienda ?? 0;
   bool hasTienda() => _tienda != null;
 
-  // "Fecha" field.
-  DateTime? _fecha;
-  DateTime? get fecha => _fecha;
-  bool hasFecha() => _fecha != null;
+  // "FechaInicio" field.
+  DateTime? _fechaInicio;
+  DateTime? get fechaInicio => _fechaInicio;
+  bool hasFechaInicio() => _fechaInicio != null;
 
-  // "ID" field.
-  int? _id;
-  int get id => _id ?? 0;
-  bool hasId() => _id != null;
+  // "FechaFinalizado" field.
+  DateTime? _fechaFinalizado;
+  DateTime? get fechaFinalizado => _fechaFinalizado;
+  bool hasFechaFinalizado() => _fechaFinalizado != null;
 
   void _initializeFields() {
     _tienda = castToType<int>(snapshotData['Tienda']);
-    _fecha = snapshotData['Fecha'] as DateTime?;
-    _id = castToType<int>(snapshotData['ID']);
+    _fechaInicio = snapshotData['FechaInicio'] as DateTime?;
+    _fechaFinalizado = snapshotData['FechaFinalizado'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -72,14 +72,14 @@ class ControlesRecord extends FirestoreRecord {
 
 Map<String, dynamic> createControlesRecordData({
   int? tienda,
-  DateTime? fecha,
-  int? id,
+  DateTime? fechaInicio,
+  DateTime? fechaFinalizado,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'Tienda': tienda,
-      'Fecha': fecha,
-      'ID': id,
+      'FechaInicio': fechaInicio,
+      'FechaFinalizado': fechaFinalizado,
     }.withoutNulls,
   );
 
@@ -92,13 +92,13 @@ class ControlesRecordDocumentEquality implements Equality<ControlesRecord> {
   @override
   bool equals(ControlesRecord? e1, ControlesRecord? e2) {
     return e1?.tienda == e2?.tienda &&
-        e1?.fecha == e2?.fecha &&
-        e1?.id == e2?.id;
+        e1?.fechaInicio == e2?.fechaInicio &&
+        e1?.fechaFinalizado == e2?.fechaFinalizado;
   }
 
   @override
-  int hash(ControlesRecord? e) =>
-      const ListEquality().hash([e?.tienda, e?.fecha, e?.id]);
+  int hash(ControlesRecord? e) => const ListEquality()
+      .hash([e?.tienda, e?.fechaInicio, e?.fechaFinalizado]);
 
   @override
   bool isValidKey(Object? o) => o is ControlesRecord;
