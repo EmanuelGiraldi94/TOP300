@@ -6,21 +6,18 @@ import 'package:flutter/material.dart';
 class ControlAPIModel extends FlutterFlowModel<ControlAPIWidget> {
   ///  State fields for stateful widgets in this page.
 
-  // State field(s) for TextField widget.
-  FocusNode? textFieldFocusNode;
-  TextEditingController? textController;
-  String? Function(BuildContext, String?)? textControllerValidator;
   // Stores action output result for [Backend Call - API (updatecolor)] action in Button widget.
   ApiCallResponse? apiResultbUpdate;
   // Stores action output result for [Backend Call - API (updatecolor)] action in Button widget.
+  ApiCallResponse? apiResultbUpdate2;
+  // Stores action output result for [Backend Call - API (updatecolor)] action in Button widget.
   ApiCallResponse? apiResultjvk;
+  // Stores action output result for [Backend Call - API (updatecolor)] action in Button widget.
+  ApiCallResponse? apiResultjvk2;
 
   @override
   void initState(BuildContext context) {}
 
   @override
-  void dispose() {
-    textFieldFocusNode?.dispose();
-    textController?.dispose();
-  }
+  void dispose() {}
 }

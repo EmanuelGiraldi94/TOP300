@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/search_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -31,9 +32,6 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => ControlAPIModel());
-
-    _model.textController ??= TextEditingController();
-    _model.textFieldFocusNode ??= FocusNode();
 
     animationsMap.addAll({
       'listViewOnPageLoadAnimation': AnimationInfo(
@@ -104,8 +102,26 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  FFAppState().Cpunt = _model.textController.text;
+                  FFAppState().Cpunt = FFAppState().Cpunt;
                   safeSetState(() {});
+                  await showModalBottomSheet(
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    enableDrag: false,
+                    context: context,
+                    builder: (context) {
+                      return GestureDetector(
+                        onTap: () {
+                          FocusScope.of(context).unfocus();
+                          FocusManager.instance.primaryFocus?.unfocus();
+                        },
+                        child: Padding(
+                          padding: MediaQuery.viewInsetsOf(context),
+                          child: const SearchWidget(),
+                        ),
+                      );
+                    },
+                  ).then((value) => safeSetState(() {}));
                 },
                 child: Icon(
                   Icons.manage_search,
@@ -122,84 +138,27 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              SizedBox(
-                width: 200.0,
-                child: TextFormField(
-                  controller: _model.textController,
-                  focusNode: _model.textFieldFocusNode,
-                  autofocus: false,
-                  obscureText: false,
-                  decoration: InputDecoration(
-                    isDense: true,
-                    labelStyle:
-                        FlutterFlowTheme.of(context).labelMedium.override(
+              Padding(
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                      child: Text(
+                        '0 /${FFAppState().TotalTiendas}',
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
                               fontFamily: 'Inter',
+                              fontSize: 22.0,
                               letterSpacing: 0.0,
+                              fontWeight: FontWeight.w900,
                             ),
-                    hintText: 'TextField',
-                    hintStyle:
-                        FlutterFlowTheme.of(context).labelMedium.override(
-                              fontFamily: 'Inter',
-                              letterSpacing: 0.0,
-                            ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
                       ),
-                      borderRadius: BorderRadius.circular(8.0),
                     ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(
-                        color: Color(0x00000000),
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    errorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    focusedErrorBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: FlutterFlowTheme.of(context).error,
-                        width: 1.0,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    filled: true,
-                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                  ),
-                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                        fontFamily: 'Inter',
-                        letterSpacing: 0.0,
-                      ),
-                  cursorColor: FlutterFlowTheme.of(context).primaryText,
-                  validator:
-                      _model.textControllerValidator.asValidator(context),
+                  ],
                 ),
-              ),
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Padding(
-                    padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                    child: Text(
-                      '0 /${FFAppState().TotalTiendas}',
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Inter',
-                            fontSize: 22.0,
-                            letterSpacing: 0.0,
-                            fontWeight: FontWeight.w900,
-                          ),
-                    ),
-                  ),
-                ],
               ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
@@ -463,27 +422,58 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                             child: FFButtonWidget(
                                               onPressed: () async {
                                                 var shouldSetState = false;
-                                                _model.apiResultbUpdate =
-                                                    await UpdatecolorCall.call(
-                                                  tiendaUpdate: FFAppState()
-                                                      .numeroTienda
-                                                      .toString(),
-                                                  skuUpdate: getJsonField(
-                                                    itemsListItem,
-                                                    r'''$.SKU''',
-                                                  ).toString(),
-                                                  colorUpdate: 1,
-                                                );
+                                                if (FFAppState().Green ==
+                                                    getJsonField(
+                                                      itemsListItem,
+                                                      r'''$.color''',
+                                                    )) {
+                                                  _model.apiResultbUpdate =
+                                                      await UpdatecolorCall
+                                                          .call(
+                                                    tiendaUpdate: FFAppState()
+                                                        .numeroTienda
+                                                        .toString(),
+                                                    skuUpdate: getJsonField(
+                                                      itemsListItem,
+                                                      r'''$.SKU''',
+                                                    ).toString(),
+                                                    colorUpdate: 3,
+                                                  );
 
-                                                shouldSetState = true;
-                                                if ((_model.apiResultbUpdate
-                                                        ?.succeeded ??
-                                                    true)) {
-                                                  if (shouldSetState) {
-                                                    safeSetState(() {});
+                                                  shouldSetState = true;
+                                                  if ((_model.apiResultbUpdate
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    if (shouldSetState) {
+                                                      safeSetState(() {});
+                                                    }
+                                                    return;
                                                   }
-                                                  return;
+                                                } else {
+                                                  _model.apiResultbUpdate2 =
+                                                      await UpdatecolorCall
+                                                          .call(
+                                                    tiendaUpdate: FFAppState()
+                                                        .numeroTienda
+                                                        .toString(),
+                                                    skuUpdate: getJsonField(
+                                                      itemsListItem,
+                                                      r'''$.SKU''',
+                                                    ).toString(),
+                                                    colorUpdate: 1,
+                                                  );
+
+                                                  shouldSetState = true;
+                                                  if ((_model.apiResultbUpdate2
+                                                          ?.succeeded ??
+                                                      true)) {
+                                                    if (shouldSetState) {
+                                                      safeSetState(() {});
+                                                    }
+                                                    return;
+                                                  }
                                                 }
+
                                                 if (shouldSetState) {
                                                   safeSetState(() {});
                                                 }
@@ -532,27 +522,56 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                           FFButtonWidget(
                                             onPressed: () async {
                                               var shouldSetState = false;
-                                              _model.apiResultjvk =
-                                                  await UpdatecolorCall.call(
-                                                tiendaUpdate: FFAppState()
-                                                    .numeroTienda
-                                                    .toString(),
-                                                skuUpdate: getJsonField(
-                                                  itemsListItem,
-                                                  r'''$.SKU''',
-                                                ).toString(),
-                                                colorUpdate: 2,
-                                              );
+                                              if (FFAppState().Red ==
+                                                  getJsonField(
+                                                    itemsListItem,
+                                                    r'''$.color''',
+                                                  )) {
+                                                _model.apiResultjvk =
+                                                    await UpdatecolorCall.call(
+                                                  tiendaUpdate: FFAppState()
+                                                      .numeroTienda
+                                                      .toString(),
+                                                  skuUpdate: getJsonField(
+                                                    itemsListItem,
+                                                    r'''$.SKU''',
+                                                  ).toString(),
+                                                  colorUpdate: 3,
+                                                );
 
-                                              shouldSetState = true;
-                                              if ((_model.apiResultjvk
-                                                      ?.succeeded ??
-                                                  true)) {
-                                                if (shouldSetState) {
-                                                  safeSetState(() {});
+                                                shouldSetState = true;
+                                                if ((_model.apiResultjvk
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  if (shouldSetState) {
+                                                    safeSetState(() {});
+                                                  }
+                                                  return;
                                                 }
-                                                return;
+                                              } else {
+                                                _model.apiResultjvk2 =
+                                                    await UpdatecolorCall.call(
+                                                  tiendaUpdate: FFAppState()
+                                                      .numeroTienda
+                                                      .toString(),
+                                                  skuUpdate: getJsonField(
+                                                    itemsListItem,
+                                                    r'''$.SKU''',
+                                                  ).toString(),
+                                                  colorUpdate: 2,
+                                                );
+
+                                                shouldSetState = true;
+                                                if ((_model.apiResultjvk2
+                                                        ?.succeeded ??
+                                                    true)) {
+                                                  if (shouldSetState) {
+                                                    safeSetState(() {});
+                                                  }
+                                                  return;
+                                                }
                                               }
+
                                               if (shouldSetState) {
                                                 safeSetState(() {});
                                               }
