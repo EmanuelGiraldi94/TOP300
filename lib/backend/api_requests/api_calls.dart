@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 import 'package:flutter/foundation.dart';
 
 import '/flutter_flow/flutter_flow_util.dart';
@@ -17,7 +16,7 @@ class GetTiendaCall {
     return ApiManager.instance.makeApiCall(
       callName: 'GetTienda',
       apiUrl:
-          'http://186.182.243.208:3000/top300?tienda=${tiendanum}&depto=${deptonum}',
+          'http://186.182.243.208:3000/top300?tienda=$tiendanum&depto=$deptonum',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -59,18 +58,18 @@ class GetTiendaCall {
 
 class UpdatecolorCall {
   static Future<ApiCallResponse> call({
-    String? tiendaUpdate = '',
-    String? skuUpdate = '',
-    int? colorUpdate,
+    String? tiendaUpdate = '3608',
+    String? skuUpdate = '211101303',
+    int? colorUpdate = 1,
   }) async {
     final ffApiRequestBody = '''
 {
-  "color": ${colorUpdate}
+  "color": $colorUpdate
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updatecolor',
       apiUrl:
-          'http://186.182.243.208:3000/update-color/${skuUpdate}/${tiendaUpdate}',
+          'http://186.182.243.208:3000/update-color/$skuUpdate/$tiendaUpdate',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},

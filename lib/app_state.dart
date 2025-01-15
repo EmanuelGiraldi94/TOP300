@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'flutter_flow/request_manager.dart';
-import '/backend/backend.dart';
-import '/backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -82,21 +78,6 @@ class FFAppState extends ChangeNotifier {
   set Red(int value) {
     _Red = value;
   }
-
-  final _productManager = StreamRequestManager<List<Top300Record>>();
-  Stream<List<Top300Record>> product({
-    String? uniqueQueryKey,
-    bool? overrideCache,
-    required Stream<List<Top300Record>> Function() requestFn,
-  }) =>
-      _productManager.performRequest(
-        uniqueQueryKey: uniqueQueryKey,
-        overrideCache: overrideCache,
-        requestFn: requestFn,
-      );
-  void clearProductCache() => _productManager.clear();
-  void clearProductCacheKey(String? uniqueKey) =>
-      _productManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {

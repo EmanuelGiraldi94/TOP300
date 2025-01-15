@@ -3,10 +3,9 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'control_a_p_i_model.dart';
 export 'control_a_p_i_model.dart';
@@ -74,7 +73,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
           ),
           actions: [
             Padding(
-              padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
               child: InkWell(
                 splashColor: Colors.transparent,
                 focusColor: Colors.transparent,
@@ -100,7 +99,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
             mainAxisSize: MainAxisSize.max,
             children: [
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FutureBuilder<ApiCallResponse>(
                   future: GetTiendaCall.call(
                     tiendanum: FFAppState().numeroTienda.toString(),
@@ -110,12 +109,15 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                     // Customize what your widget looks like when it's loading.
                     if (!snapshot.hasData) {
                       return Center(
-                        child: SizedBox(
-                          width: 40.0,
-                          height: 40.0,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              FlutterFlowTheme.of(context).primary,
+                        child: Padding(
+                          padding: const EdgeInsetsDirectional.fromSTEB(
+                              0.0, 230.0, 0.0, 0.0),
+                          child: SizedBox(
+                            width: 50.0,
+                            height: 50.0,
+                            child: SpinKitFadingCube(
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 50.0,
                             ),
                           ),
                         ),
@@ -136,18 +138,18 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           itemCount: itemsList.length,
-                          separatorBuilder: (_, __) => SizedBox(height: 10.0),
+                          separatorBuilder: (_, __) => const SizedBox(height: 10.0),
                           itemBuilder: (context, itemsListIndex) {
                             final itemsListItem = itemsList[itemsListIndex];
                             return Padding(
-                              padding: EdgeInsetsDirectional.fromSTEB(
+                              padding: const EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 8.0),
                               child: Container(
                                 width: double.infinity,
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  boxShadow: [
+                                  boxShadow: const [
                                     BoxShadow(
                                       blurRadius: 3.0,
                                       color: Color(0x411D2429),
@@ -160,14 +162,14 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                   borderRadius: BorderRadius.circular(8.0),
                                 ),
                                 child: Padding(
-                                  padding: EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(8.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              EdgeInsetsDirectional.fromSTEB(
+                                              const EdgeInsetsDirectional.fromSTEB(
                                                   8.0, 8.0, 4.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -196,7 +198,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 8.0, 0.0),
                                                     child: AutoSizeText(
@@ -215,7 +217,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 8.0, 0.0),
                                                     child: AutoSizeText(
@@ -247,7 +249,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 8.0, 0.0),
                                                     child: AutoSizeText(
@@ -266,7 +268,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 8.0, 0.0),
                                                     child: AutoSizeText(
@@ -298,7 +300,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 8.0, 0.0),
                                                     child: AutoSizeText(
@@ -317,7 +319,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        EdgeInsetsDirectional
+                                                        const EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 4.0,
                                                                 8.0, 0.0),
                                                     child: AutoSizeText(
@@ -353,11 +355,11 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                         children: [
                                           Padding(
                                             padding:
-                                                EdgeInsetsDirectional.fromSTEB(
+                                                const EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 0.0, 0.0, 15.0),
                                             child: FFButtonWidget(
                                               onPressed: () async {
-                                                var _shouldSetState = false;
+                                                var shouldSetState = false;
                                                 _model.apiResultbUpdate =
                                                     await UpdatecolorCall.call(
                                                   tiendaUpdate: FFAppState()
@@ -370,26 +372,28 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                   colorUpdate: 1,
                                                 );
 
-                                                _shouldSetState = true;
+                                                shouldSetState = true;
                                                 if ((_model.apiResultbUpdate
                                                         ?.succeeded ??
                                                     true)) {
-                                                  if (_shouldSetState)
+                                                  if (shouldSetState) {
                                                     safeSetState(() {});
+                                                  }
                                                   return;
                                                 }
-                                                if (_shouldSetState)
+                                                if (shouldSetState) {
                                                   safeSetState(() {});
+                                                }
                                               },
-                                              text: 'Button',
+                                              text: '',
                                               options: FFButtonOptions(
                                                 width: 40.0,
                                                 height: 40.0,
-                                                padding: EdgeInsetsDirectional
+                                                padding: const EdgeInsetsDirectional
                                                     .fromSTEB(
-                                                        16.0, 0.0, 16.0, 0.0),
+                                                        0.0, 0.0, 0.0, 0.0),
                                                 iconPadding:
-                                                    EdgeInsetsDirectional
+                                                    const EdgeInsetsDirectional
                                                         .fromSTEB(
                                                             0.0, 0.0, 0.0, 0.0),
                                                 color: FFAppState().Green ==
@@ -397,7 +401,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                           itemsListItem,
                                                           r'''$.color''',
                                                         )
-                                                    ? Color(0xFF1EFF00)
+                                                    ? const Color(0xFF1EFF00)
                                                     : Colors.white,
                                                 textStyle: FlutterFlowTheme.of(
                                                         context)
@@ -408,10 +412,13 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                           FlutterFlowTheme.of(
                                                                   context)
                                                               .secondary,
+                                                      fontSize: 12.0,
                                                       letterSpacing: 0.0,
+                                                      fontWeight:
+                                                          FontWeight.normal,
                                                     ),
                                                 elevation: 0.0,
-                                                borderSide: BorderSide(
+                                                borderSide: const BorderSide(
                                                   color: Colors.black,
                                                 ),
                                                 borderRadius:
@@ -421,7 +428,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                           ),
                                           FFButtonWidget(
                                             onPressed: () async {
-                                              var _shouldSetState = false;
+                                              var shouldSetState = false;
                                               _model.apiResultjvk =
                                                   await UpdatecolorCall.call(
                                                 tiendaUpdate: FFAppState()
@@ -434,44 +441,49 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                                                 colorUpdate: 2,
                                               );
 
-                                              _shouldSetState = true;
+                                              shouldSetState = true;
                                               if ((_model.apiResultjvk
                                                       ?.succeeded ??
                                                   true)) {
-                                                if (_shouldSetState)
+                                                if (shouldSetState) {
                                                   safeSetState(() {});
+                                                }
                                                 return;
                                               }
-                                              if (_shouldSetState)
+                                              if (shouldSetState) {
                                                 safeSetState(() {});
+                                              }
                                             },
-                                            text: 'Button',
+                                            text: '',
                                             options: FFButtonOptions(
                                               width: 40.0,
                                               height: 40.0,
-                                              padding: EdgeInsetsDirectional
-                                                  .fromSTEB(
-                                                      16.0, 0.0, 16.0, 0.0),
-                                              iconPadding: EdgeInsetsDirectional
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(0.0, 0.0, 0.0, 0.0),
+                                              iconPadding: const EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color: FFAppState().Red ==
                                                       getJsonField(
                                                         itemsListItem,
                                                         r'''$.color''',
                                                       )
-                                                  ? Color(0xFFFF0000)
+                                                  ? const Color(0xFFFF0000)
                                                   : Colors.white,
-                                              textStyle:
-                                                  FlutterFlowTheme.of(context)
-                                                      .titleSmall
-                                                      .override(
-                                                        fontFamily:
-                                                            'Inter Tight',
-                                                        color: Colors.white,
-                                                        letterSpacing: 0.0,
-                                                      ),
+                                              textStyle: FlutterFlowTheme.of(
+                                                      context)
+                                                  .titleSmall
+                                                  .override(
+                                                    fontFamily: 'Inter Tight',
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondary,
+                                                    fontSize: 12.0,
+                                                    letterSpacing: 0.0,
+                                                    fontWeight:
+                                                        FontWeight.normal,
+                                                  ),
                                               elevation: 0.0,
-                                              borderSide: BorderSide(
+                                              borderSide: const BorderSide(
                                                 color: Colors.black,
                                               ),
                                               borderRadius:

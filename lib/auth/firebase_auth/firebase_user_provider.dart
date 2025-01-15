@@ -8,6 +8,7 @@ export '../base_auth_user_provider.dart';
 class Top300FirebaseUser extends BaseAuthUser {
   Top300FirebaseUser(this.user);
   User? user;
+  @override
   bool get loggedIn => user != null;
 
   @override
