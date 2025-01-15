@@ -8,7 +8,6 @@ import 'schema/util/firestore_util.dart';
 import 'schema/tiendas_record.dart';
 import 'schema/top300_record.dart';
 import 'schema/controles_record.dart';
-import 'schema/t3608_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -20,7 +19,6 @@ export 'schema/util/schema_util.dart';
 export 'schema/tiendas_record.dart';
 export 'schema/top300_record.dart';
 export 'schema/controles_record.dart';
-export 'schema/t3608_record.dart';
 
 /// Functions to query TiendasRecords (as a Stream and as a Future).
 Future<int> queryTiendasRecordCount({
@@ -128,43 +126,6 @@ Future<List<ControlesRecord>> queryControlesRecordOnce({
     queryCollectionOnce(
       ControlesRecord.collection,
       ControlesRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-/// Functions to query T3608Records (as a Stream and as a Future).
-Future<int> queryT3608RecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      T3608Record.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<T3608Record>> queryT3608Record({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      T3608Record.collection,
-      T3608Record.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<T3608Record>> queryT3608RecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      T3608Record.collection,
-      T3608Record.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
@@ -289,7 +250,7 @@ Future<FFFirestorePage<T>> queryCollectionPage<T>(
   } else {
     docSnapshot = await query.get();
   }
-  getDocs(QuerySnapshot s) => s.docs
+  final getDocs = (QuerySnapshot s) => s.docs
       .map(
         (d) => safeGet(
           () => recordBuilder(d),

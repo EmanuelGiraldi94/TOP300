@@ -1,36 +1,34 @@
 import '/auth/firebase_auth/auth_util.dart';
 import '/backend/backend.dart';
-import '/flutter_flow/flutter_flow_drop_down.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/flutter_flow/form_field_controller.dart';
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'control_model.dart';
-export 'control_model.dart';
+import 'control_filtro_model.dart';
+export 'control_filtro_model.dart';
 
-class ControlWidget extends StatefulWidget {
-  const ControlWidget({super.key});
+class ControlFiltroWidget extends StatefulWidget {
+  const ControlFiltroWidget({super.key});
 
   @override
-  State<ControlWidget> createState() => _ControlWidgetState();
+  State<ControlFiltroWidget> createState() => _ControlFiltroWidgetState();
 }
 
-class _ControlWidgetState extends State<ControlWidget> {
-  late ControlModel _model;
+class _ControlFiltroWidgetState extends State<ControlFiltroWidget> {
+  late ControlFiltroModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => ControlModel());
+    _model = createModel(context, () => ControlFiltroModel());
   }
 
   @override
@@ -88,59 +86,6 @@ class _ControlWidgetState extends State<ControlWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              FlutterFlowDropDown<String>(
-                controller: _model.dropDownValueController ??=
-                    FormFieldController<String>(null),
-                options: ['CELUSAL'],
-                onChanged: (val) =>
-                    safeSetState(() => _model.dropDownValue = val),
-                width: 200.0,
-                height: 40.0,
-                textStyle: FlutterFlowTheme.of(context).bodyMedium.override(
-                      fontFamily: 'Inter',
-                      letterSpacing: 0.0,
-                    ),
-                hintText: 'Select...',
-                icon: Icon(
-                  Icons.keyboard_arrow_down_rounded,
-                  color: FlutterFlowTheme.of(context).secondaryText,
-                  size: 24.0,
-                ),
-                fillColor: FlutterFlowTheme.of(context).secondaryBackground,
-                elevation: 2.0,
-                borderColor: Colors.transparent,
-                borderWidth: 0.0,
-                borderRadius: 8.0,
-                margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
-                hidesUnderline: true,
-                isOverButton: false,
-                isSearchable: false,
-                isMultiSelect: false,
-              ),
-              Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
-                child: FFButtonWidget(
-                  onPressed: () async {
-                    context.pushNamed('ControlFiltro');
-                  },
-                  text: 'Button',
-                  options: FFButtonOptions(
-                    height: 40.0,
-                    padding:
-                        EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
-                    iconPadding:
-                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                    color: FlutterFlowTheme.of(context).primary,
-                    textStyle: FlutterFlowTheme.of(context).titleSmall.override(
-                          fontFamily: 'Inter Tight',
-                          color: Colors.white,
-                          letterSpacing: 0.0,
-                        ),
-                    elevation: 0.0,
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                ),
-              ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: StreamBuilder<List<Top300Record>>(
@@ -148,12 +93,12 @@ class _ControlWidgetState extends State<ControlWidget> {
                     requestFn: () => queryTop300Record(
                       queryBuilder: (top300Record) => top300Record
                           .where(
-                            'Tienda',
-                            isEqualTo: FFAppState().numeroTienda,
-                          )
-                          .where(
                             'Departamento',
                             isEqualTo: 1,
+                          )
+                          .where(
+                            'Tienda',
+                            isEqualTo: FFAppState().numeroTienda,
                           ),
                     ),
                   ),

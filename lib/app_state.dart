@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'flutter_flow/request_manager.dart';
+import '/backend/backend.dart';
+import '/backend/api_requests/api_manager.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'flutter_flow/flutter_flow_util.dart';
 
 class FFAppState extends ChangeNotifier {
   static FFAppState _instance = FFAppState._internal();
@@ -61,17 +65,38 @@ class FFAppState extends ChangeNotifier {
     prefs.setInt('ff_numeroTienda', value);
   }
 
-  Color _Green = const Color(0xffffffff);
-  Color get Green => _Green;
-  set Green(Color value) {
+  bool _FilterVisible = false;
+  bool get FilterVisible => _FilterVisible;
+  set FilterVisible(bool value) {
+    _FilterVisible = value;
+  }
+
+  int _Green = 1;
+  int get Green => _Green;
+  set Green(int value) {
     _Green = value;
   }
 
-  Color _Red = const Color(0xffffffff);
-  Color get Red => _Red;
-  set Red(Color value) {
+  int _Red = 2;
+  int get Red => _Red;
+  set Red(int value) {
     _Red = value;
   }
+
+  final _productManager = StreamRequestManager<List<Top300Record>>();
+  Stream<List<Top300Record>> product({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Stream<List<Top300Record>> Function() requestFn,
+  }) =>
+      _productManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearProductCache() => _productManager.clear();
+  void clearProductCacheKey(String? uniqueKey) =>
+      _productManager.clearRequest(uniqueKey);
 }
 
 void _safeInit(Function() initializeField) {
@@ -84,11 +109,4 @@ Future _safeInitAsync(Function() initializeField) async {
   try {
     await initializeField();
   } catch (_) {}
-}
-
-Color? _colorFromIntValue(int? val) {
-  if (val == null) {
-    return null;
-  }
-  return Color(val);
 }

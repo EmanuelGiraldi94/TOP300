@@ -2,9 +2,11 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import '/custom_code/actions/index.dart' as actions;
+import 'dart:ui';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'home_model.dart';
 export 'home_model.dart';
@@ -56,13 +58,13 @@ class _HomeWidgetState extends State<HomeWidget> {
           automaticallyImplyLeading: false,
           actions: [
             Align(
-              alignment: const AlignmentDirectional(0.0, -1.0),
+              alignment: AlignmentDirectional(0.0, -1.0),
               child: FlutterFlowIconButton(
                 borderColor: Colors.transparent,
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: const Icon(
+                icon: Icon(
                   Icons.exit_to_app,
                   color: Color(0xFFFF0000),
                   size: 30.0,
@@ -86,7 +88,7 @@ class _HomeWidgetState extends State<HomeWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +97,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 0.0, 0.0),
                           child: Text(
                             'TOP 300 / ',
@@ -122,7 +124,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                     ),
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(24.0, 4.0, 0.0, 0.0),
                       child: Text(
                         'Controles',
                         textAlign: TextAlign.start,
@@ -145,18 +147,18 @@ class _HomeWidgetState extends State<HomeWidget> {
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                         child: ListView(
                           padding: EdgeInsets.zero,
                           shrinkWrap: true,
                           scrollDirection: Axis.vertical,
                           children: [
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   16.0, 0.0, 16.0, 0.0),
                               child: Container(
                                 width: double.infinity,
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   maxWidth: 570.0,
                                 ),
                                 decoration: BoxDecoration(
@@ -170,7 +172,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   ),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       16.0, 12.0, 16.0, 12.0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.max,
@@ -180,7 +182,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 12.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -190,7 +192,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 0.0, 0.0, 5.0),
                                                 child: RichText(
@@ -199,7 +201,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           .textScaler,
                                                   text: TextSpan(
                                                     children: [
-                                                      const TextSpan(
+                                                      TextSpan(
                                                         text:
                                                             'Fecha de creacion: ',
                                                         style: TextStyle(),
@@ -230,7 +232,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 12.0,
                                                                 0.0, 0.0),
                                                     child: Container(
@@ -253,11 +255,11 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                       ),
                                                       child: Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       12.0,
                                                                       0.0,
@@ -284,7 +286,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(65.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -294,7 +296,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                           .bodyMedium
                                                           .override(
                                                             fontFamily: 'Inter',
-                                                            color: const Color(
+                                                            color: Color(
                                                                 0xFF0E0E0E),
                                                             fontSize: 20.0,
                                                             letterSpacing: 0.0,
@@ -305,7 +307,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                   ),
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(50.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: Text(
@@ -349,23 +351,28 @@ class _HomeWidgetState extends State<HomeWidget> {
                 children: [
                   Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        await actions.updateColorToFalse(
-                          3608,
+                        context.pushNamed(
+                          'ControlAPI',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 2000),
+                            ),
+                          },
                         );
-
-                        context.pushNamed('Control');
                       },
                       text: 'Crear nuevo control',
                       options: FFButtonOptions(
                         width: 300.0,
                         height: 50.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             16.0, 0.0, 16.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
