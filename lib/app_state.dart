@@ -78,6 +78,41 @@ class FFAppState extends ChangeNotifier {
   set Red(int value) {
     _Red = value;
   }
+
+  List<bool> _UpdateColor = [];
+  List<bool> get UpdateColor => _UpdateColor;
+  set UpdateColor(List<bool> value) {
+    _UpdateColor = value;
+  }
+
+  void addToUpdateColor(bool value) {
+    UpdateColor.add(value);
+  }
+
+  void removeFromUpdateColor(bool value) {
+    UpdateColor.remove(value);
+  }
+
+  void removeAtIndexFromUpdateColor(int index) {
+    UpdateColor.removeAt(index);
+  }
+
+  void updateUpdateColorAtIndex(
+    int index,
+    bool Function(bool) updateFn,
+  ) {
+    UpdateColor[index] = updateFn(_UpdateColor[index]);
+  }
+
+  void insertAtIndexInUpdateColor(int index, bool value) {
+    UpdateColor.insert(index, value);
+  }
+
+  String _TotalTiendas = '';
+  String get TotalTiendas => _TotalTiendas;
+  set TotalTiendas(String value) {
+    _TotalTiendas = value;
+  }
 }
 
 void _safeInit(Function() initializeField) {

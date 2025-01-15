@@ -1,3 +1,4 @@
+import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
@@ -351,7 +352,28 @@ class _HomeWidgetState extends State<HomeWidget> {
                         const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
                     child: FFButtonWidget(
                       onPressed: () async {
-                        context.pushNamed('ControlAPI');
+                        _model.countfinal = await ContarCall.call(
+                          tiendacount: FFAppState().numeroTienda.toString(),
+                        );
+
+                        FFAppState().TotalTiendas = getJsonField(
+                          (_model.countfinal?.jsonBody ?? ''),
+                          r'''$.total_items''',
+                        ).toString();
+                        safeSetState(() {});
+
+                        context.pushNamed(
+                          'ControlAPI',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: const TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.leftToRight,
+                              duration: Duration(milliseconds: 500),
+                            ),
+                          },
+                        );
+
+                        safeSetState(() {});
                       },
                       text: 'Crear nuevo control',
                       options: FFButtonOptions(

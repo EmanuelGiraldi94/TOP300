@@ -85,6 +85,33 @@ class UpdatecolorCall {
   }
 }
 
+class ContarCall {
+  static Future<ApiCallResponse> call({
+    String? tiendacount = '3608',
+    String? deptocount = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'Contar',
+      apiUrl:
+          'http://186.182.243.208:3000/count-items/$tiendacount?depto=$deptocount',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static int? totalitems(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_items''',
+      ));
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

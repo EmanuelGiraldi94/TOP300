@@ -1,10 +1,12 @@
 import '/backend/api_requests/api_calls.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'control_a_p_i_model.dart';
@@ -17,15 +19,37 @@ class ControlAPIWidget extends StatefulWidget {
   State<ControlAPIWidget> createState() => _ControlAPIWidgetState();
 }
 
-class _ControlAPIWidgetState extends State<ControlAPIWidget> {
+class _ControlAPIWidgetState extends State<ControlAPIWidget>
+    with TickerProviderStateMixin {
   late ControlAPIModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  final animationsMap = <String, AnimationInfo>{};
 
   @override
   void initState() {
     super.initState();
     _model = createModel(context, () => ControlAPIModel());
+
+    _model.textController ??= TextEditingController();
+    _model.textFieldFocusNode ??= FocusNode();
+
+    animationsMap.addAll({
+      'listViewOnPageLoadAnimation': AnimationInfo(
+        reverse: true,
+        trigger: AnimationTrigger.onPageLoad,
+        effectsBuilder: () => [
+          MoveEffect(
+            curve: Curves.easeInOut,
+            delay: 0.0.ms,
+            duration: 600.0.ms,
+            begin: const Offset(0.0, 0.0),
+            end: const Offset(0.0, 0.0),
+          ),
+        ],
+      ),
+    });
   }
 
   @override
@@ -80,7 +104,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                 hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
                 onTap: () async {
-                  FFAppState().Cpunt = '2';
+                  FFAppState().Cpunt = _model.textController.text;
                   safeSetState(() {});
                 },
                 child: Icon(
@@ -98,6 +122,85 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
+              SizedBox(
+                width: 200.0,
+                child: TextFormField(
+                  controller: _model.textController,
+                  focusNode: _model.textFieldFocusNode,
+                  autofocus: false,
+                  obscureText: false,
+                  decoration: InputDecoration(
+                    isDense: true,
+                    labelStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                    hintText: 'TextField',
+                    hintStyle:
+                        FlutterFlowTheme.of(context).labelMedium.override(
+                              fontFamily: 'Inter',
+                              letterSpacing: 0.0,
+                            ),
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                        color: Color(0x00000000),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    errorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    focusedErrorBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: FlutterFlowTheme.of(context).error,
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    filled: true,
+                    fillColor: FlutterFlowTheme.of(context).secondaryBackground,
+                  ),
+                  style: FlutterFlowTheme.of(context).bodyMedium.override(
+                        fontFamily: 'Inter',
+                        letterSpacing: 0.0,
+                      ),
+                  cursorColor: FlutterFlowTheme.of(context).primaryText,
+                  validator:
+                      _model.textControllerValidator.asValidator(context),
+                ),
+              ),
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
+                    child: Text(
+                      '0 /${FFAppState().TotalTiendas}',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            fontSize: 22.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w900,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FutureBuilder<ApiCallResponse>(
@@ -111,7 +214,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                       return Center(
                         child: Padding(
                           padding: const EdgeInsetsDirectional.fromSTEB(
-                              0.0, 230.0, 0.0, 0.0),
+                              0.0, 250.0, 0.0, 0.0),
                           child: SizedBox(
                             width: 50.0,
                             height: 50.0,
@@ -130,7 +233,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                         final itemsList = getJsonField(
                           listViewGetTiendaResponse.jsonBody,
                           r'''$''',
-                        ).toList();
+                        ).toList().take(100).toList();
 
                         return ListView.separated(
                           padding: EdgeInsets.zero,
@@ -498,7 +601,8 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget> {
                               ),
                             );
                           },
-                        );
+                        ).animateOnPageLoad(
+                            animationsMap['listViewOnPageLoadAnimation']!);
                       },
                     );
                   },
