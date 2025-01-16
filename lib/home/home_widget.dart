@@ -148,7 +148,9 @@ class _HomeWidgetState extends State<HomeWidget> {
                         padding:
                             const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 0.0, 0.0),
                         child: FutureBuilder<ApiCallResponse>(
-                          future: GetReportesCall.call(),
+                          future: GetReportesCall.call(
+                            tiendaGR: FFAppState().numeroTienda.toString(),
+                          ),
                           builder: (context, snapshot) {
                             // Customize what your widget looks like when it's loading.
                             if (!snapshot.hasData) {
@@ -172,11 +174,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                   r'''$''',
                                 ).toList();
 
-                                return ListView.builder(
+                                return ListView.separated(
                                   padding: EdgeInsets.zero,
                                   shrinkWrap: true,
                                   scrollDirection: Axis.vertical,
                                   itemCount: reportList.length,
+                                  separatorBuilder: (_, __) =>
+                                      const SizedBox(height: 18.0),
                                   itemBuilder: (context, reportListIndex) {
                                     final reportListItem =
                                         reportList[reportListIndex];
@@ -431,6 +435,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                           (_model.countfinal?.jsonBody ?? ''),
                           r'''$.total_items''',
                         ).toString();
+                        FFAppState().Cpunt = '';
                         safeSetState(() {});
                         await CreateRerpotCall.call(
                           tienda: FFAppState().numeroTienda.toString(),

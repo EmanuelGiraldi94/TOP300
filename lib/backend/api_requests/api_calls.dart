@@ -143,10 +143,12 @@ class CreateRerpotCall {
 }
 
 class GetReportesCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    String? tiendaGR = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'GetReportes',
-      apiUrl: 'http://186.182.243.208:3000/reportes',
+      apiUrl: 'http://186.182.243.208:3000/reportes/$tiendaGR',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -174,6 +176,42 @@ class GetReportesCall {
         response,
         r'''$[:].estado''',
       ));
+}
+
+class UpdateReporteCall {
+  static Future<ApiCallResponse> call({
+    String? tiendaR = '',
+    String? fechaR = '',
+    String? estadoR = '',
+    String? fechaFR = '',
+    int? rojoR,
+    int? verdeR,
+    int? itemR,
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "estado": "${escapeStringForJson(estadoR)}",
+  "cantidadItem": $itemR,
+  "rojos": $rojoR,
+  "verdes": $verdeR,
+  "fechaFinalizacion": "${escapeStringForJson(fechaFR)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'UpdateReporte',
+      apiUrl: 'http://186.182.243.208:3000/reportes/$tiendaR/$fechaR',
+      callType: ApiCallType.PUT,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class ApiPagingParams {
