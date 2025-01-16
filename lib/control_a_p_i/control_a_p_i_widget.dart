@@ -1,7 +1,6 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/search_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -69,97 +68,101 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
       child: Scaffold(
         key: scaffoldKey,
         backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-        appBar: AppBar(
-          backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
-          automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30.0,
-            borderWidth: 1.0,
-            buttonSize: 44.0,
-            icon: Icon(
-              Icons.arrow_back_sharp,
-              color: FlutterFlowTheme.of(context).secondaryText,
-              size: 28.0,
-            ),
-            onPressed: () async {
-              context.safePop();
-            },
-          ),
-          title: Text(
-            'Control',
-            style: FlutterFlowTheme.of(context).displaySmall.override(
-                  fontFamily: 'Inter Tight',
-                  letterSpacing: 0.0,
-                ),
-          ),
-          actions: [
-            Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
-              child: InkWell(
-                splashColor: Colors.transparent,
-                focusColor: Colors.transparent,
-                hoverColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-                onTap: () async {
-                  FFAppState().Cpunt = FFAppState().Cpunt;
-                  safeSetState(() {});
-                  await showModalBottomSheet(
-                    isScrollControlled: true,
-                    backgroundColor: Colors.transparent,
-                    enableDrag: false,
-                    context: context,
-                    builder: (context) {
-                      return GestureDetector(
-                        onTap: () {
-                          FocusScope.of(context).unfocus();
-                          FocusManager.instance.primaryFocus?.unfocus();
-                        },
-                        child: Padding(
-                          padding: MediaQuery.viewInsetsOf(context),
-                          child: const SearchWidget(),
-                        ),
-                      );
-                    },
-                  ).then((value) => safeSetState(() {}));
-                },
-                child: Icon(
-                  Icons.manage_search,
-                  color: FlutterFlowTheme.of(context).primaryText,
-                  size: 33.0,
-                ),
+        appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(80.0),
+          child: AppBar(
+            backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
+            automaticallyImplyLeading: false,
+            leading: InkWell(
+              splashColor: Colors.transparent,
+              focusColor: Colors.transparent,
+              hoverColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+              onTap: () async {
+                safeSetState(() {});
+                context.safePop();
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: FlutterFlowTheme.of(context).primaryText,
+                size: 34.0,
               ),
             ),
-          ],
-          centerTitle: false,
-          elevation: 0.0,
+            title: Text(
+              'Control',
+              style: FlutterFlowTheme.of(context).displaySmall.override(
+                    fontFamily: 'Inter Tight',
+                    letterSpacing: 0.0,
+                  ),
+            ),
+            actions: [
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        FFAppState().Cpunt = FFAppState().Cpunt;
+                        safeSetState(() {});
+                        await showModalBottomSheet(
+                          isScrollControlled: true,
+                          backgroundColor: Colors.transparent,
+                          enableDrag: false,
+                          context: context,
+                          builder: (context) {
+                            return GestureDetector(
+                              onTap: () {
+                                FocusScope.of(context).unfocus();
+                                FocusManager.instance.primaryFocus?.unfocus();
+                              },
+                              child: Padding(
+                                padding: MediaQuery.viewInsetsOf(context),
+                                child: const SearchWidget(),
+                              ),
+                            );
+                          },
+                        ).then((value) => safeSetState(() {}));
+                      },
+                      child: Icon(
+                        Icons.manage_search,
+                        color: FlutterFlowTheme.of(context).primaryText,
+                        size: 34.0,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 15.0, 15.0, 0.0),
+                    child: Text(
+                      '0 /${FFAppState().TotalTiendas}',
+                      style: FlutterFlowTheme.of(context).bodyMedium.override(
+                            fontFamily: 'Inter',
+                            fontSize: 22.0,
+                            letterSpacing: 0.0,
+                            fontWeight: FontWeight.w900,
+                          ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            centerTitle: false,
+            toolbarHeight: 80.0,
+            elevation: 0.0,
+          ),
         ),
         body: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Padding(
-                      padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 15.0, 0.0),
-                      child: Text(
-                        '0 /${FFAppState().TotalTiendas}',
-                        style: FlutterFlowTheme.of(context).bodyMedium.override(
-                              fontFamily: 'Inter',
-                              fontSize: 22.0,
-                              letterSpacing: 0.0,
-                              fontWeight: FontWeight.w900,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
               Padding(
                 padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                 child: FutureBuilder<ApiCallResponse>(

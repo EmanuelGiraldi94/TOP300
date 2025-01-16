@@ -112,6 +112,70 @@ class ContarCall {
       ));
 }
 
+class CreateRerpotCall {
+  static Future<ApiCallResponse> call({
+    String? fechaCreacion = '',
+    String? estado = '',
+    String? tienda = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "tienda": "${escapeStringForJson(tienda)}",
+  "estado": "${escapeStringForJson(estado)}",
+  "fechaCreacion": "${escapeStringForJson(fechaCreacion)}"
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'CreateRerpot',
+      apiUrl: 'http://186.182.243.208:3000/reportes',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetReportesCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetReportes',
+      apiUrl: 'http://186.182.243.208:3000/reportes',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? fechaCreaReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].fecha_creacion''',
+      ));
+  static String? tiendaReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].tienda''',
+      ));
+  static String? estadoReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].estado''',
+      ));
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;
