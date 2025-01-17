@@ -122,7 +122,10 @@ class CreateRerpotCall {
 {
   "tienda": "${escapeStringForJson(tienda)}",
   "estado": "${escapeStringForJson(estado)}",
-  "fechaCreacion": "${escapeStringForJson(fechaCreacion)}"
+  "fechaCreacion": "${escapeStringForJson(fechaCreacion)}",
+  "rojos": "0",
+  "verdes": "0",
+  "cantidad_item": "0"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreateRerpot',
@@ -144,7 +147,7 @@ class CreateRerpotCall {
 
 class GetReportesCall {
   static Future<ApiCallResponse> call({
-    String? tiendaGR = '',
+    String? tiendaGR = '3608',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'GetReportes',
@@ -212,6 +215,37 @@ class UpdateReporteCall {
       alwaysAllowBody: false,
     );
   }
+}
+
+class GetColorsReportCall {
+  static Future<ApiCallResponse> call() async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetColorsReport',
+      apiUrl: 'http://186.182.243.208:3000/count-color-values/3608',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static String? verdeGet(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.count_color_1''',
+      ));
+  static String? rojoGet(dynamic response) => castToType<String>(getJsonField(
+        response,
+        r'''$.count_color_2''',
+      ));
+  static int? totalcolorGet(dynamic response) => castToType<int>(getJsonField(
+        response,
+        r'''$.total_colors''',
+      ));
 }
 
 class ApiPagingParams {

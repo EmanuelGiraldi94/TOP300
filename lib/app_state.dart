@@ -61,12 +61,6 @@ class FFAppState extends ChangeNotifier {
     prefs.setInt('ff_numeroTienda', value);
   }
 
-  bool _FilterVisible = false;
-  bool get FilterVisible => _FilterVisible;
-  set FilterVisible(bool value) {
-    _FilterVisible = value;
-  }
-
   int _Green = 1;
   int get Green => _Green;
   set Green(int value) {
