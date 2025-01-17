@@ -30,6 +30,8 @@ class _HomeWidgetState extends State<HomeWidget> {
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       setDarkModeSetting(context, ThemeMode.light);
+      FFAppState().fecha = '1';
+      safeSetState(() {});
     });
   }
 
@@ -45,7 +47,9 @@ class _HomeWidgetState extends State<HomeWidget> {
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: GetColorsReportCall.call(),
+      future: GetColorsReportCall.call(
+        tiendacolor: FFAppState().numeroTienda.toString(),
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
@@ -194,7 +198,7 @@ class _HomeWidgetState extends State<HomeWidget> {
 
                                 return Builder(
                                   builder: (context) {
-                                    final reportList = getJsonField(
+                                    final itemsList = getJsonField(
                                       listViewGetReportesResponse.jsonBody,
                                       r'''$''',
                                     ).toList();
@@ -203,12 +207,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       padding: EdgeInsets.zero,
                                       shrinkWrap: true,
                                       scrollDirection: Axis.vertical,
-                                      itemCount: reportList.length,
+                                      itemCount: itemsList.length,
                                       separatorBuilder: (_, __) =>
                                           const SizedBox(height: 18.0),
-                                      itemBuilder: (context, reportListIndex) {
-                                        final reportListItem =
-                                            reportList[reportListIndex];
+                                      itemBuilder: (context, itemsListIndex) {
+                                        final itemsListItem =
+                                            itemsList[itemsListIndex];
                                         return Padding(
                                           padding:
                                               const EdgeInsetsDirectional.fromSTEB(
@@ -284,7 +288,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   TextSpan(
                                                                     text:
                                                                         getJsonField(
-                                                                      reportListItem,
+                                                                      itemsListItem,
                                                                       r'''$.fecha_creacion''',
                                                                     ).toString(),
                                                                     style:
@@ -357,7 +361,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       child:
                                                                           Text(
                                                                         getJsonField(
-                                                                          reportListItem,
+                                                                          itemsListItem,
                                                                           r'''$.estado''',
                                                                         ).toString(),
                                                                         style: FlutterFlowTheme.of(context)
@@ -380,11 +384,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                         10.0,
                                                                         0.0),
                                                                 child: Text(
-                                                                  getJsonField(
-                                                                    homeGetColorsReportResponse
-                                                                        .jsonBody,
-                                                                    r'''$.count_color_1''',
-                                                                  ).toString(),
+                                                                  dateTimeFormat(
+                                                                            "d/M/y",
+                                                                            getCurrentTimestamp,
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          ) ==
+                                                                          getJsonField(
+                                                                            itemsListItem,
+                                                                            r'''$.fecha_creacion''',
+                                                                          ).toString()
+                                                                      ? getJsonField(
+                                                                          homeGetColorsReportResponse
+                                                                              .jsonBody,
+                                                                          r'''$.count_color_1''',
+                                                                        ).toString()
+                                                                      : getJsonField(
+                                                                          itemsListItem,
+                                                                          r'''$.verdes''',
+                                                                        ).toString(),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -411,11 +429,25 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                             0.0,
                                                                             0.0),
                                                                 child: Text(
-                                                                  getJsonField(
-                                                                    homeGetColorsReportResponse
-                                                                        .jsonBody,
-                                                                    r'''$.count_color_2''',
-                                                                  ).toString(),
+                                                                  dateTimeFormat(
+                                                                            "d/M/y",
+                                                                            getCurrentTimestamp,
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          ) ==
+                                                                          getJsonField(
+                                                                            itemsListItem,
+                                                                            r'''$.fecha_creacion''',
+                                                                          ).toString()
+                                                                      ? getJsonField(
+                                                                          homeGetColorsReportResponse
+                                                                              .jsonBody,
+                                                                          r'''$.count_color_2''',
+                                                                        ).toString()
+                                                                      : getJsonField(
+                                                                          itemsListItem,
+                                                                          r'''$.rojos''',
+                                                                        ).toString(),
                                                                   style: FlutterFlowTheme.of(
                                                                           context)
                                                                       .bodyMedium
@@ -458,73 +490,131 @@ class _HomeWidgetState extends State<HomeWidget> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 15.0),
-                        child: FFButtonWidget(
-                          onPressed: () async {
-                            _model.countfinal = await ContarCall.call(
-                              tiendacount: FFAppState().numeroTienda.toString(),
-                            );
-
-                            FFAppState().TotalTiendas = getJsonField(
-                              (_model.countfinal?.jsonBody ?? ''),
-                              r'''$.total_items''',
-                            ).toString();
-                            FFAppState().Cpunt = '';
-                            safeSetState(() {});
-                            await CreateRerpotCall.call(
-                              tienda: FFAppState().numeroTienda.toString(),
-                              estado: 'En proceso',
-                              fechaCreacion: dateTimeFormat(
-                                "d/M/y",
-                                getCurrentTimestamp,
-                                locale:
-                                    FFLocalizations.of(context).languageCode,
-                              ),
-                            );
-
-                            context.pushNamed(
-                              'ControlAPI',
-                              extra: <String, dynamic>{
-                                kTransitionInfoKey: const TransitionInfo(
-                                  hasTransition: true,
-                                  transitionType:
-                                      PageTransitionType.leftToRight,
-                                  duration: Duration(milliseconds: 500),
-                                ),
-                              },
-                            );
-
-                            safeSetState(() {});
-                          },
-                          text: 'Crear nuevo control',
-                          options: FFButtonOptions(
-                            width: 300.0,
+                  FutureBuilder<ApiCallResponse>(
+                    future: GetReportesCall.call(
+                      tiendaGR: FFAppState().numeroTienda.toString(),
+                    ),
+                    builder: (context, snapshot) {
+                      // Customize what your widget looks like when it's loading.
+                      if (!snapshot.hasData) {
+                        return Center(
+                          child: SizedBox(
+                            width: 50.0,
                             height: 50.0,
-                            padding: const EdgeInsetsDirectional.fromSTEB(
-                                16.0, 0.0, 16.0, 0.0),
-                            iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                0.0, 0.0, 0.0, 0.0),
-                            color: FlutterFlowTheme.of(context).primary,
-                            textStyle: FlutterFlowTheme.of(context)
-                                .titleSmall
-                                .override(
-                                  fontFamily: 'Inter Tight',
-                                  color: Colors.white,
-                                  letterSpacing: 0.0,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                            elevation: 0.0,
-                            borderRadius: BorderRadius.circular(8.0),
+                            child: SpinKitFadingCube(
+                              color: FlutterFlowTheme.of(context).primary,
+                              size: 50.0,
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
+                        );
+                      }
+                      final rowGetReportesResponse = snapshot.data!;
+
+                      return Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                0.0, 0.0, 0.0, 15.0),
+                            child: FFButtonWidget(
+                              onPressed: () async {
+                                _model.countfinal = await ContarCall.call(
+                                  tiendacount:
+                                      FFAppState().numeroTienda.toString(),
+                                );
+
+                                FFAppState().TotalTiendas = getJsonField(
+                                  (_model.countfinal?.jsonBody ?? ''),
+                                  r'''$.total_items''',
+                                ).toString();
+                                FFAppState().Cpunt = '';
+                                safeSetState(() {});
+                                if (dateTimeFormat(
+                                      "d/M/y",
+                                      getCurrentTimestamp,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ) ==
+                                    getJsonField(
+                                      homeGetColorsReportResponse.jsonBody,
+                                      r'''$.fecha_creacion''',
+                                    ).toString()) {
+                                  context.pushNamed(
+                                    'ControlAPI',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.leftToRight,
+                                        duration: Duration(milliseconds: 500),
+                                      ),
+                                    },
+                                  );
+                                } else {
+                                  await CreateRerpotCall.call(
+                                    tienda:
+                                        FFAppState().numeroTienda.toString(),
+                                    estado: 'En proceso',
+                                    fechaCreacion: dateTimeFormat(
+                                      "d/M/y",
+                                      getCurrentTimestamp,
+                                      locale: FFLocalizations.of(context)
+                                          .languageCode,
+                                    ),
+                                  );
+
+                                  context.pushNamed(
+                                    'ControlAPI',
+                                    extra: <String, dynamic>{
+                                      kTransitionInfoKey: const TransitionInfo(
+                                        hasTransition: true,
+                                        transitionType:
+                                            PageTransitionType.leftToRight,
+                                        duration: Duration(milliseconds: 500),
+                                      ),
+                                    },
+                                  );
+                                }
+
+                                safeSetState(() {});
+                              },
+                              text: dateTimeFormat(
+                                        "d/M/y",
+                                        getCurrentTimestamp,
+                                        locale: FFLocalizations.of(context)
+                                            .languageCode,
+                                      ) ==
+                                      getJsonField(
+                                        homeGetColorsReportResponse.jsonBody,
+                                        r'''$.fecha_creacion''',
+                                      ).toString()
+                                  ? 'Continuar control'
+                                  : 'Crear nuevo control',
+                              options: FFButtonOptions(
+                                width: 300.0,
+                                height: 50.0,
+                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                    16.0, 0.0, 16.0, 0.0),
+                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    0.0, 0.0, 0.0, 0.0),
+                                color: FlutterFlowTheme.of(context).primary,
+                                textStyle: FlutterFlowTheme.of(context)
+                                    .titleSmall
+                                    .override(
+                                      fontFamily: 'Inter Tight',
+                                      color: Colors.white,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                elevation: 0.0,
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+                    },
                   ),
                 ],
               ),

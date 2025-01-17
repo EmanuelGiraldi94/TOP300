@@ -41,7 +41,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_contrasea', value);
   }
 
-  String _Cpunt = '';
+  String _Cpunt = '1';
   String get Cpunt => _Cpunt;
   set Cpunt(String value) {
     _Cpunt = value;
@@ -77,6 +77,18 @@ class FFAppState extends ChangeNotifier {
   String get TotalTiendas => _TotalTiendas;
   set TotalTiendas(String value) {
     _TotalTiendas = value;
+  }
+
+  String _fecha = '';
+  String get fecha => _fecha;
+  set fecha(String value) {
+    _fecha = value;
+  }
+
+  String _prueba = '1';
+  String get prueba => _prueba;
+  set prueba(String value) {
+    _prueba = value;
   }
 }
 

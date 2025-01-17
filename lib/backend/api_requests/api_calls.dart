@@ -116,20 +116,17 @@ class CreateRerpotCall {
   static Future<ApiCallResponse> call({
     String? fechaCreacion = '',
     String? estado = '',
-    String? tienda = '',
+    String? tienda = '3608',
   }) async {
     final ffApiRequestBody = '''
 {
   "tienda": "${escapeStringForJson(tienda)}",
   "estado": "${escapeStringForJson(estado)}",
-  "fechaCreacion": "${escapeStringForJson(fechaCreacion)}",
-  "rojos": "0",
-  "verdes": "0",
-  "cantidad_item": "0"
+  "fechaCreacion": "${escapeStringForJson(fechaCreacion)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreateRerpot',
-      apiUrl: 'http://186.182.243.208:3000/reportes',
+      apiUrl: 'http://186.182.243.208:3000/reportes$tienda',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -147,11 +144,11 @@ class CreateRerpotCall {
 
 class GetReportesCall {
   static Future<ApiCallResponse> call({
-    String? tiendaGR = '3608',
+    String? tiendaGR = '',
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'GetReportes',
-      apiUrl: 'http://186.182.243.208:3000/reportes/$tiendaGR',
+      apiUrl: 'http://186.182.243.208:3000/reportes$tiendaGR',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -179,6 +176,26 @@ class GetReportesCall {
         response,
         r'''$[:].estado''',
       ));
+  static String? rojosReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].rojos''',
+      ));
+  static String? verdesReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].verdes''',
+      ));
+  static String? itemReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].cantidad_item''',
+      ));
+  static String? fechaFReport(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$[:].fecha_finalizacion''',
+      ));
 }
 
 class UpdateReporteCall {
@@ -187,9 +204,9 @@ class UpdateReporteCall {
     String? fechaR = '',
     String? estadoR = '',
     String? fechaFR = '',
-    int? rojoR,
-    int? verdeR,
-    int? itemR,
+    int? rojoR = 0,
+    int? verdeR = 0,
+    int? itemR = 0,
   }) async {
     final ffApiRequestBody = '''
 {
@@ -218,10 +235,13 @@ class UpdateReporteCall {
 }
 
 class GetColorsReportCall {
-  static Future<ApiCallResponse> call() async {
+  static Future<ApiCallResponse> call({
+    String? tiendacolor = '',
+  }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'GetColorsReport',
-      apiUrl: 'http://186.182.243.208:3000/count-color-values/3608',
+      apiUrl:
+          'http://186.182.243.208:3000/count-color-values/$tiendacolor/reportes$tiendacolor',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

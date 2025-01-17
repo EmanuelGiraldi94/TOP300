@@ -61,7 +61,9 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
     context.watch<FFAppState>();
 
     return FutureBuilder<ApiCallResponse>(
-      future: GetColorsReportCall.call(),
+      future: GetColorsReportCall.call(
+        tiendacolor: FFAppState().numeroTienda.toString(),
+      ),
       builder: (context, snapshot) {
         // Customize what your widget looks like when it's loading.
         if (!snapshot.hasData) {
