@@ -415,31 +415,12 @@ class _LoginWidgetState extends State<LoginWidget>
                                           FFAppState().update(() {});
 
                                           context.pushNamed('Home');
-
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            SnackBar(
-                                              content: Text(
-                                                'llEGUE A IF',
-                                                style: TextStyle(
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primaryText,
-                                                ),
-                                              ),
-                                              duration:
-                                                  const Duration(milliseconds: 4000),
-                                              backgroundColor:
-                                                  FlutterFlowTheme.of(context)
-                                                      .secondary,
-                                            ),
-                                          );
                                         } else {
                                           ScaffoldMessenger.of(context)
                                               .showSnackBar(
                                             SnackBar(
                                               content: Text(
-                                                'ELSE',
+                                                'Usuario o contraseña invalida',
                                                 style: TextStyle(
                                                   color: FlutterFlowTheme.of(
                                                           context)

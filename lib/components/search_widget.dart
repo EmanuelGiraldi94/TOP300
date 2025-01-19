@@ -126,7 +126,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
                           fontFamily: 'Inter',
                           color: Colors.black,
-                          fontSize: 18.0,
+                          fontSize: 20.0,
                           letterSpacing: 0.0,
                           fontWeight: FontWeight.w900,
                         ),
@@ -153,7 +153,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
                       const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: const Color(0xFFC5C9D0),
+                  color: FlutterFlowTheme.of(context).primary,
                   textStyle: FlutterFlowTheme.of(context).titleLarge.override(
                         fontFamily: 'Inter Tight',
                         letterSpacing: 0.0,

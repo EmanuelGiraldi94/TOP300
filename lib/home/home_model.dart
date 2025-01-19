@@ -8,6 +8,8 @@ class HomeModel extends FlutterFlowModel<HomeWidget> {
 
   // Stores action output result for [Backend Call - API (Contar)] action in Button widget.
   ApiCallResponse? countfinal;
+  // Stores action output result for [Backend Call - API (GetBooleanReport)] action in Button widget.
+  ApiCallResponse? estadoAPIout;
 
   @override
   void initState(BuildContext context) {}

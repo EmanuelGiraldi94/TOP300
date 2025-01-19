@@ -201,7 +201,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                     final itemsList = getJsonField(
                                       listViewGetReportesResponse.jsonBody,
                                       r'''$''',
-                                    ).toList();
+                                    ).toList().take(90).toList();
 
                                     return ListView.separated(
                                       padding: EdgeInsets.zero,
@@ -330,18 +330,16 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   height: 40.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: FlutterFlowTheme.of(
-                                                                            context)
-                                                                        .accent1,
+                                                                    color: const Color(
+                                                                        0xFF68A61B),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             12.0),
                                                                     border:
                                                                         Border
                                                                             .all(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primary,
+                                                                      color: const Color(
+                                                                          0xFF0C7208),
                                                                       width:
                                                                           2.0,
                                                                     ),
@@ -368,7 +366,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              color: FlutterFlowTheme.of(context).primary,
+                                                                              color: Colors.black,
                                                                               letterSpacing: 0.0,
                                                                             ),
                                                                       ),
@@ -384,15 +382,10 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                         10.0,
                                                                         0.0),
                                                                 child: Text(
-                                                                  dateTimeFormat(
-                                                                            "d/M/y",
-                                                                            getCurrentTimestamp,
-                                                                            locale:
-                                                                                FFLocalizations.of(context).languageCode,
-                                                                          ) ==
+                                                                  FFAppState().estadoAPI2 ==
                                                                           getJsonField(
                                                                             itemsListItem,
-                                                                            r'''$.fecha_creacion''',
+                                                                            r'''$.estado''',
                                                                           ).toString()
                                                                       ? getJsonField(
                                                                           homeGetColorsReportResponse
@@ -429,12 +422,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                             0.0,
                                                                             0.0),
                                                                 child: Text(
-                                                                  dateTimeFormat(
-                                                                            "d/M/y",
-                                                                            getCurrentTimestamp,
-                                                                            locale:
-                                                                                FFLocalizations.of(context).languageCode,
-                                                                          ) ==
+                                                                  FFAppState().estadoAPI2 ==
                                                                           getJsonField(
                                                                             itemsListItem,
                                                                             r'''$.fecha_creacion''',
@@ -442,7 +430,7 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                       ? getJsonField(
                                                                           homeGetColorsReportResponse
                                                                               .jsonBody,
-                                                                          r'''$.count_color_2''',
+                                                                          r'''$.estado''',
                                                                         ).toString()
                                                                       : getJsonField(
                                                                           itemsListItem,
@@ -517,99 +505,130 @@ class _HomeWidgetState extends State<HomeWidget> {
                           Padding(
                             padding: const EdgeInsetsDirectional.fromSTEB(
                                 0.0, 0.0, 0.0, 15.0),
-                            child: FFButtonWidget(
-                              onPressed: () async {
-                                _model.countfinal = await ContarCall.call(
-                                  tiendacount:
-                                      FFAppState().numeroTienda.toString(),
-                                );
-
-                                FFAppState().TotalTiendas = getJsonField(
-                                  (_model.countfinal?.jsonBody ?? ''),
-                                  r'''$.total_items''',
-                                ).toString();
-                                FFAppState().Cpunt = '';
-                                safeSetState(() {});
-                                if (dateTimeFormat(
-                                      "d/M/y",
-                                      getCurrentTimestamp,
-                                      locale: FFLocalizations.of(context)
-                                          .languageCode,
-                                    ) ==
-                                    getJsonField(
-                                      homeGetColorsReportResponse.jsonBody,
-                                      r'''$.fecha_creacion''',
-                                    ).toString()) {
-                                  context.pushNamed(
-                                    'ControlAPI',
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: const TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType:
-                                            PageTransitionType.leftToRight,
-                                        duration: Duration(milliseconds: 500),
+                            child: FutureBuilder<ApiCallResponse>(
+                              future: GetBooleanReportCall.call(
+                                tiendaBoolean:
+                                    FFAppState().numeroTienda.toString(),
+                              ),
+                              builder: (context, snapshot) {
+                                // Customize what your widget looks like when it's loading.
+                                if (!snapshot.hasData) {
+                                  return Center(
+                                    child: SizedBox(
+                                      width: 50.0,
+                                      height: 50.0,
+                                      child: SpinKitFadingCube(
+                                        color: FlutterFlowTheme.of(context)
+                                            .primary,
+                                        size: 50.0,
                                       ),
-                                    },
-                                  );
-                                } else {
-                                  await CreateRerpotCall.call(
-                                    tienda:
-                                        FFAppState().numeroTienda.toString(),
-                                    estado: 'En proceso',
-                                    fechaCreacion: dateTimeFormat(
-                                      "d/M/y",
-                                      getCurrentTimestamp,
-                                      locale: FFLocalizations.of(context)
-                                          .languageCode,
                                     ),
-                                  );
-
-                                  context.pushNamed(
-                                    'ControlAPI',
-                                    extra: <String, dynamic>{
-                                      kTransitionInfoKey: const TransitionInfo(
-                                        hasTransition: true,
-                                        transitionType:
-                                            PageTransitionType.leftToRight,
-                                        duration: Duration(milliseconds: 500),
-                                      ),
-                                    },
                                   );
                                 }
+                                final buttonGetBooleanReportResponse =
+                                    snapshot.data!;
 
-                                safeSetState(() {});
+                                return FFButtonWidget(
+                                  onPressed: () async {
+                                    _model.countfinal = await ContarCall.call(
+                                      tiendacount:
+                                          FFAppState().numeroTienda.toString(),
+                                    );
+
+                                    FFAppState().TotalTiendas = getJsonField(
+                                      (_model.countfinal?.jsonBody ?? ''),
+                                      r'''$.total_items''',
+                                    ).toString();
+                                    FFAppState().Cpunt = '';
+                                    FFAppState().TiendasTotales1 = getJsonField(
+                                      (_model.countfinal?.jsonBody ?? ''),
+                                      r'''$.total_items''',
+                                    );
+                                    safeSetState(() {});
+                                    _model.estadoAPIout =
+                                        await GetBooleanReportCall.call(
+                                      tiendaBoolean:
+                                          FFAppState().numeroTienda.toString(),
+                                    );
+
+                                    if (FFAppState().estadoAPI ==
+                                        getJsonField(
+                                          (_model.estadoAPIout?.jsonBody ?? ''),
+                                          r'''$.enProceso''',
+                                        )) {
+                                      context.pushNamed(
+                                        'ControlAPI',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.leftToRight,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                          ),
+                                        },
+                                      );
+                                    } else {
+                                      await CreateRerpotCall.call(
+                                        tienda: FFAppState()
+                                            .numeroTienda
+                                            .toString(),
+                                        estado: 'En proceso',
+                                        fechaCreacion: dateTimeFormat(
+                                          "d/M/y",
+                                          getCurrentTimestamp,
+                                          locale: FFLocalizations.of(context)
+                                              .languageCode,
+                                        ),
+                                      );
+
+                                      await PostAllColorCall.call();
+
+                                      context.pushNamed(
+                                        'ControlAPI',
+                                        extra: <String, dynamic>{
+                                          kTransitionInfoKey: const TransitionInfo(
+                                            hasTransition: true,
+                                            transitionType:
+                                                PageTransitionType.leftToRight,
+                                            duration:
+                                                Duration(milliseconds: 500),
+                                          ),
+                                        },
+                                      );
+                                    }
+
+                                    safeSetState(() {});
+                                  },
+                                  text: FFAppState().estadoAPI ==
+                                          getJsonField(
+                                            buttonGetBooleanReportResponse
+                                                .jsonBody,
+                                            r'''$.enProceso''',
+                                          )
+                                      ? 'Continuar control'
+                                      : 'Crear nuevo control',
+                                  options: FFButtonOptions(
+                                    width: 300.0,
+                                    height: 50.0,
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        16.0, 0.0, 16.0, 0.0),
+                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                        0.0, 0.0, 0.0, 0.0),
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    textStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .override(
+                                          fontFamily: 'Inter Tight',
+                                          color: Colors.white,
+                                          letterSpacing: 0.0,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                    elevation: 0.0,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                  ),
+                                );
                               },
-                              text: dateTimeFormat(
-                                        "d/M/y",
-                                        getCurrentTimestamp,
-                                        locale: FFLocalizations.of(context)
-                                            .languageCode,
-                                      ) ==
-                                      getJsonField(
-                                        homeGetColorsReportResponse.jsonBody,
-                                        r'''$.fecha_creacion''',
-                                      ).toString()
-                                  ? 'Continuar control'
-                                  : 'Crear nuevo control',
-                              options: FFButtonOptions(
-                                width: 300.0,
-                                height: 50.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    16.0, 0.0, 16.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
-                                    0.0, 0.0, 0.0, 0.0),
-                                color: FlutterFlowTheme.of(context).primary,
-                                textStyle: FlutterFlowTheme.of(context)
-                                    .titleSmall
-                                    .override(
-                                      fontFamily: 'Inter Tight',
-                                      color: Colors.white,
-                                      letterSpacing: 0.0,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                elevation: 0.0,
-                                borderRadius: BorderRadius.circular(8.0),
-                              ),
                             ),
                           ),
                         ],

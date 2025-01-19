@@ -41,10 +41,6 @@ class GetTiendaCall {
         response,
         r'''$[:].Descrip''',
       ));
-  static int? stockAPI(dynamic response) => castToType<int>(getJsonField(
-        response,
-        r'''$[:].Stock''',
-      ));
   static List<int>? tiendaAPI(dynamic response) => (getJsonField(
         response,
         r'''$[:].Tienda''',
@@ -52,6 +48,15 @@ class GetTiendaCall {
       ) as List?)
           ?.withoutNulls
           .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? upcapi(dynamic response) => (getJsonField(
+        response,
+        r'''$[:].UPC''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
           .withoutNulls
           .toList();
 }
@@ -210,7 +215,7 @@ class UpdateReporteCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "estado": "${escapeStringForJson(estadoR)}",
+  "estadoNuevo": "${escapeStringForJson(estadoR)}",
   "cantidadItem": $itemR,
   "rojos": $rojoR,
   "verdes": $verdeR,
@@ -265,6 +270,63 @@ class GetColorsReportCall {
   static int? totalcolorGet(dynamic response) => castToType<int>(getJsonField(
         response,
         r'''$.total_colors''',
+      ));
+  static String? fechaColorGet(dynamic response) =>
+      castToType<String>(getJsonField(
+        response,
+        r'''$.fecha_creacion''',
+      ));
+}
+
+class PostAllColorCall {
+  static Future<ApiCallResponse> call({
+    String? tiendaColorUpdate = '',
+  }) async {
+    final ffApiRequestBody = '''
+{
+  "tienda": "${escapeStringForJson(tiendaColorUpdate)}",
+  "color": 3
+}''';
+    return ApiManager.instance.makeApiCall(
+      callName: 'PostAllColor',
+      apiUrl: 'http://186.182.243.208:3000/update-color',
+      callType: ApiCallType.POST,
+      headers: {},
+      params: {},
+      body: ffApiRequestBody,
+      bodyType: BodyType.JSON,
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+}
+
+class GetBooleanReportCall {
+  static Future<ApiCallResponse> call({
+    String? tiendaBoolean = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'GetBooleanReport',
+      apiUrl: 'http://186.182.243.208:3000/reportes$tiendaBoolean/enProceso',
+      callType: ApiCallType.GET,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static bool? estadoBool(dynamic response) => castToType<bool>(getJsonField(
+        response,
+        r'''$.enProceso''',
       ));
 }
 

@@ -85,10 +85,34 @@ class FFAppState extends ChangeNotifier {
     _fecha = value;
   }
 
-  String _prueba = '1';
-  String get prueba => _prueba;
-  set prueba(String value) {
-    _prueba = value;
+  String _preba11 = '';
+  String get preba11 => _preba11;
+  set preba11(String value) {
+    _preba11 = value;
+  }
+
+  int _TiendasTotales1 = 0;
+  int get TiendasTotales1 => _TiendasTotales1;
+  set TiendasTotales1(int value) {
+    _TiendasTotales1 = value;
+  }
+
+  String _fechareportefinal = '31/12/1969';
+  String get fechareportefinal => _fechareportefinal;
+  set fechareportefinal(String value) {
+    _fechareportefinal = value;
+  }
+
+  bool _estadoAPI = true;
+  bool get estadoAPI => _estadoAPI;
+  set estadoAPI(bool value) {
+    _estadoAPI = value;
+  }
+
+  String _estadoAPI2 = 'En Proceso';
+  String get estadoAPI2 => _estadoAPI2;
+  set estadoAPI2(String value) {
+    _estadoAPI2 = value;
   }
 }
 
