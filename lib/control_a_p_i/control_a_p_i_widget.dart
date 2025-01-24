@@ -1,4 +1,5 @@
 import '/backend/api_requests/api_calls.dart';
+import '/components/finalizar_reporte_widget.dart';
 import '/components/search_widget.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
@@ -461,7 +462,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                           0.0),
                                                               child:
                                                                   AutoSizeText(
-                                                                'Stock:',
+                                                                'UPC:',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .start,
@@ -812,41 +813,25 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                     children: [
                       FFButtonWidget(
                         onPressed: () async {
-                          var shouldSetState = false;
-                          _model.apiResultvg8 = await UpdateReporteCall.call(
-                            tiendaR: FFAppState().numeroTienda.toString(),
-                            rojoR: getJsonField(
-                              controlAPIGetColorsReportResponse.jsonBody,
-                              r'''$.count_color_2''',
-                            ),
-                            verdeR: getJsonField(
-                              controlAPIGetColorsReportResponse.jsonBody,
-                              r'''$.count_color_1''',
-                            ),
-                            itemR: getJsonField(
-                              controlAPIGetColorsReportResponse.jsonBody,
-                              r'''$.total_colors''',
-                            ),
-                            fechaR: 'En proceso',
-                            estadoR: 'Finalizado',
-                          );
-
-                          shouldSetState = true;
-                          if ((_model.apiResultvg8?.succeeded ?? true)) {
-                            _model.apiResultqiu = await PostAllColorCall.call(
-                              tiendaColorUpdate:
-                                  FFAppState().numeroTienda.toString(),
-                            );
-
-                            shouldSetState = true;
-                            if ((_model.apiResultqiu?.succeeded ?? true)) {
-                              context.safePop();
-                            } else {
-                              if (shouldSetState) safeSetState(() {});
-                              return;
-                            }
-                          }
-                          if (shouldSetState) safeSetState(() {});
+                          await showModalBottomSheet(
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent,
+                            isDismissible: false,
+                            enableDrag: false,
+                            context: context,
+                            builder: (context) {
+                              return GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                  FocusManager.instance.primaryFocus?.unfocus();
+                                },
+                                child: Padding(
+                                  padding: MediaQuery.viewInsetsOf(context),
+                                  child: const FinalizarReporteWidget(),
+                                ),
+                              );
+                            },
+                          ).then((value) => safeSetState(() {}));
                         },
                         text: 'Finalizar Reporte',
                         options: FFButtonOptions(

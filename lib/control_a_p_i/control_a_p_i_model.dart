@@ -14,10 +14,6 @@ class ControlAPIModel extends FlutterFlowModel<ControlAPIWidget> {
   ApiCallResponse? apiResultjvk;
   // Stores action output result for [Backend Call - API (updatecolor)] action in Button widget.
   ApiCallResponse? apiResultjvk2;
-  // Stores action output result for [Backend Call - API (UpdateReporte)] action in Button widget.
-  ApiCallResponse? apiResultvg8;
-  // Stores action output result for [Backend Call - API (PostAllColor)] action in Button widget.
-  ApiCallResponse? apiResultqiu;
 
   @override
   void initState(BuildContext context) {}

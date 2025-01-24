@@ -109,7 +109,7 @@ class FFAppState extends ChangeNotifier {
     _estadoAPI = value;
   }
 
-  String _estadoAPI2 = 'En Proceso';
+  String _estadoAPI2 = 'En proceso';
   String get estadoAPI2 => _estadoAPI2;
   set estadoAPI2(String value) {
     _estadoAPI2 = value;

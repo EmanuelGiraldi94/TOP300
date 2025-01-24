@@ -330,16 +330,30 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   height: 40.0,
                                                                   decoration:
                                                                       BoxDecoration(
-                                                                    color: const Color(
-                                                                        0xFF68A61B),
+                                                                    color: FFAppState()
+                                                                                .estadoAPI2 ==
+                                                                            getJsonField(
+                                                                              itemsListItem,
+                                                                              r'''$.estado''',
+                                                                            )
+                                                                                .toString()
+                                                                        ? FlutterFlowTheme.of(context)
+                                                                            .accent1
+                                                                        : const Color(
+                                                                            0x9220850B),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
                                                                             12.0),
                                                                     border:
                                                                         Border
                                                                             .all(
-                                                                      color: const Color(
-                                                                          0xFF0C7208),
+                                                                      color: FFAppState().estadoAPI2 ==
+                                                                              getJsonField(
+                                                                                itemsListItem,
+                                                                                r'''$.estado''',
+                                                                              ).toString()
+                                                                          ? const Color(0xFF4B39EF)
+                                                                          : const Color(0xFF217C09),
                                                                       width:
                                                                           2.0,
                                                                     ),
@@ -366,7 +380,13 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              color: Colors.black,
+                                                                              color: FFAppState().estadoAPI2 ==
+                                                                                      getJsonField(
+                                                                                        itemsListItem,
+                                                                                        r'''$.estado''',
+                                                                                      ).toString()
+                                                                                  ? FlutterFlowTheme.of(context).primary
+                                                                                  : const Color(0xFF125B05),
                                                                               letterSpacing: 0.0,
                                                                             ),
                                                                       ),
@@ -425,12 +445,12 @@ class _HomeWidgetState extends State<HomeWidget> {
                                                                   FFAppState().estadoAPI2 ==
                                                                           getJsonField(
                                                                             itemsListItem,
-                                                                            r'''$.fecha_creacion''',
+                                                                            r'''$.estado''',
                                                                           ).toString()
                                                                       ? getJsonField(
                                                                           homeGetColorsReportResponse
                                                                               .jsonBody,
-                                                                          r'''$.estado''',
+                                                                          r'''$.count_color_2''',
                                                                         ).toString()
                                                                       : getJsonField(
                                                                           itemsListItem,
@@ -539,63 +559,122 @@ class _HomeWidgetState extends State<HomeWidget> {
                                       (_model.countfinal?.jsonBody ?? ''),
                                       r'''$.total_items''',
                                     ).toString();
-                                    FFAppState().Cpunt = '';
+                                    FFAppState().Cpunt = '1';
                                     FFAppState().TiendasTotales1 = getJsonField(
                                       (_model.countfinal?.jsonBody ?? ''),
                                       r'''$.total_items''',
                                     );
                                     safeSetState(() {});
-                                    _model.estadoAPIout =
-                                        await GetBooleanReportCall.call(
-                                      tiendaBoolean:
-                                          FFAppState().numeroTienda.toString(),
-                                    );
-
-                                    if (FFAppState().estadoAPI ==
-                                        getJsonField(
-                                          (_model.estadoAPIout?.jsonBody ?? ''),
-                                          r'''$.enProceso''',
-                                        )) {
-                                      context.pushNamed(
-                                        'ControlAPI',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.leftToRight,
-                                            duration:
-                                                Duration(milliseconds: 500),
-                                          ),
-                                        },
-                                      );
-                                    } else {
-                                      await CreateRerpotCall.call(
-                                        tienda: FFAppState()
-                                            .numeroTienda
-                                            .toString(),
-                                        estado: 'En proceso',
-                                        fechaCreacion: dateTimeFormat(
+                                    if (dateTimeFormat(
                                           "d/M/y",
                                           getCurrentTimestamp,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
-                                        ),
+                                        ) ==
+                                        getJsonField(
+                                          homeGetColorsReportResponse.jsonBody,
+                                          r'''$.fecha_creacion''',
+                                        ).toString()) {
+                                      _model.estadoAPIout2 =
+                                          await GetBooleanReportCall.call(
+                                        tiendaBoolean: FFAppState()
+                                            .numeroTienda
+                                            .toString(),
                                       );
 
-                                      await PostAllColorCall.call();
-
-                                      context.pushNamed(
-                                        'ControlAPI',
-                                        extra: <String, dynamic>{
-                                          kTransitionInfoKey: const TransitionInfo(
-                                            hasTransition: true,
-                                            transitionType:
-                                                PageTransitionType.leftToRight,
+                                      if (FFAppState().estadoAPI ==
+                                          getJsonField(
+                                            (_model.estadoAPIout2?.jsonBody ??
+                                                ''),
+                                            r'''$.enProceso''',
+                                          )) {
+                                        context.pushNamed(
+                                          'ControlAPI',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .leftToRight,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                            ),
+                                          },
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          SnackBar(
+                                            content: const Text(
+                                              'Solo se puede crear un reporte por dia',
+                                              style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 15.0,
+                                              ),
+                                            ),
                                             duration:
-                                                Duration(milliseconds: 500),
+                                                const Duration(milliseconds: 6000),
+                                            backgroundColor:
+                                                FlutterFlowTheme.of(context)
+                                                    .secondary,
                                           ),
-                                        },
+                                        );
+                                      }
+                                    } else {
+                                      _model.estadoAPIout =
+                                          await GetBooleanReportCall.call(
+                                        tiendaBoolean: FFAppState()
+                                            .numeroTienda
+                                            .toString(),
                                       );
+
+                                      if (FFAppState().estadoAPI ==
+                                          getJsonField(
+                                            (_model.estadoAPIout?.jsonBody ??
+                                                ''),
+                                            r'''$.enProceso''',
+                                          )) {
+                                        context.pushNamed(
+                                          'ControlAPI',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .leftToRight,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                            ),
+                                          },
+                                        );
+                                      } else {
+                                        await CreateRerpotCall.call(
+                                          tienda: FFAppState()
+                                              .numeroTienda
+                                              .toString(),
+                                          estado: 'En proceso',
+                                          fechaCreacion: dateTimeFormat(
+                                            "d/M/y",
+                                            getCurrentTimestamp,
+                                            locale: FFLocalizations.of(context)
+                                                .languageCode,
+                                          ),
+                                        );
+
+                                        await PostAllColorCall.call();
+
+                                        context.pushNamed(
+                                          'ControlAPI',
+                                          extra: <String, dynamic>{
+                                            kTransitionInfoKey: const TransitionInfo(
+                                              hasTransition: true,
+                                              transitionType: PageTransitionType
+                                                  .leftToRight,
+                                              duration:
+                                                  Duration(milliseconds: 500),
+                                            ),
+                                          },
+                                        );
+                                      }
                                     }
 
                                     safeSetState(() {});
