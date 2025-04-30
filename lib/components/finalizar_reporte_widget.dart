@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'finalizar_reporte_model.dart';
 export 'finalizar_reporte_model.dart';
@@ -46,7 +47,7 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
       height: 270.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             blurRadius: 5.0,
             color: Color(0x3B1D2429),
@@ -56,7 +57,7 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
             ),
           )
         ],
-        borderRadius: const BorderRadius.only(
+        borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(0.0),
           bottomRight: Radius.circular(0.0),
           topLeft: Radius.circular(16.0),
@@ -64,7 +65,7 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
         ),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(20.0),
+        padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
@@ -72,13 +73,22 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
               'Estas seguro de que quiere finalizar el reporte?',
               textAlign: TextAlign.center,
               style: FlutterFlowTheme.of(context).titleLarge.override(
-                    fontFamily: 'Inter Tight',
+                    font: GoogleFonts.interTight(
+                      fontWeight:
+                          FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                      fontStyle:
+                          FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                    ),
                     fontSize: 26.0,
                     letterSpacing: 0.0,
+                    fontWeight:
+                        FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                    fontStyle:
+                        FlutterFlowTheme.of(context).titleLarge.fontStyle,
                   ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
               child: FutureBuilder<ApiCallResponse>(
                 future: GetColorsReportCall.call(
                   tiendacolor: FFAppState().numeroTienda.toString(),
@@ -127,6 +137,10 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
 
                         if ((_model.apiResultqiu33?.succeeded ?? true)) {
                           Navigator.pop(context);
+                          await DeleteColorosTiendasCall.call(
+                            tienda: FFAppState().numeroTienda.toString(),
+                          );
+
                           context.safePop();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -139,7 +153,7 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              duration: const Duration(milliseconds: 6000),
+                              duration: Duration(milliseconds: 6000),
                               backgroundColor:
                                   FlutterFlowTheme.of(context).secondary,
                             ),
@@ -155,7 +169,7 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
                                 fontWeight: FontWeight.w500,
                               ),
                             ),
-                            duration: const Duration(milliseconds: 6000),
+                            duration: Duration(milliseconds: 6000),
                             backgroundColor:
                                 FlutterFlowTheme.of(context).secondary,
                           ),
@@ -169,18 +183,31 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
                       width: double.infinity,
                       height: 60.0,
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       iconPadding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                       color: FlutterFlowTheme.of(context).primary,
                       textStyle:
                           FlutterFlowTheme.of(context).titleLarge.override(
-                                fontFamily: 'Inter Tight',
+                                font: GoogleFonts.interTight(
+                                  fontWeight: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .fontWeight,
+                                  fontStyle: FlutterFlowTheme.of(context)
+                                      .titleLarge
+                                      .fontStyle,
+                                ),
                                 color: Colors.white,
                                 letterSpacing: 0.0,
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .fontStyle,
                               ),
                       elevation: 2.0,
-                      borderSide: const BorderSide(
+                      borderSide: BorderSide(
                         color: Colors.transparent,
                         width: 1.0,
                       ),
@@ -190,7 +217,7 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
               child: FFButtonWidget(
                 onPressed: () async {
                   Navigator.pop(context);
@@ -199,17 +226,27 @@ class _FinalizarReporteWidgetState extends State<FinalizarReporteWidget> {
                 options: FFButtonOptions(
                   width: double.infinity,
                   height: 60.0,
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                   iconPadding:
-                      const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
-                  color: const Color(0xC4B42C2C),
+                      EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                  color: Color(0xC4B42C2C),
                   textStyle: FlutterFlowTheme.of(context).titleLarge.override(
-                        fontFamily: 'Inter Tight',
+                        font: GoogleFonts.interTight(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .titleLarge
+                              .fontWeight,
+                          fontStyle:
+                              FlutterFlowTheme.of(context).titleLarge.fontStyle,
+                        ),
                         color: Colors.white,
                         letterSpacing: 0.0,
+                        fontWeight:
+                            FlutterFlowTheme.of(context).titleLarge.fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).titleLarge.fontStyle,
                       ),
                   elevation: 0.0,
-                  borderSide: const BorderSide(
+                  borderSide: BorderSide(
                     color: Colors.transparent,
                     width: 0.0,
                   ),

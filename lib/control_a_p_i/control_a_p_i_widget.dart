@@ -5,16 +5,19 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'control_a_p_i_model.dart';
 export 'control_a_p_i_model.dart';
 
 class ControlAPIWidget extends StatefulWidget {
   const ControlAPIWidget({super.key});
+
+  static String routeName = 'ControlAPI';
+  static String routePath = '/controlAPI';
 
   @override
   State<ControlAPIWidget> createState() => _ControlAPIWidgetState();
@@ -42,8 +45,8 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -93,7 +96,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             appBar: PreferredSize(
-              preferredSize: const Size.fromHeight(80.0),
+              preferredSize: Size.fromHeight(80.0),
               child: AppBar(
                 backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
                 automaticallyImplyLeading: false,
@@ -115,8 +118,20 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                 title: Text(
                   'Control',
                   style: FlutterFlowTheme.of(context).displaySmall.override(
-                        fontFamily: 'Inter Tight',
+                        font: GoogleFonts.interTight(
+                          fontWeight: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .fontWeight,
+                          fontStyle: FlutterFlowTheme.of(context)
+                              .displaySmall
+                              .fontStyle,
+                        ),
                         letterSpacing: 0.0,
+                        fontWeight: FlutterFlowTheme.of(context)
+                            .displaySmall
+                            .fontWeight,
+                        fontStyle:
+                            FlutterFlowTheme.of(context).displaySmall.fontStyle,
                       ),
                 ),
                 actions: [
@@ -127,7 +142,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 20.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -150,7 +165,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                   },
                                   child: Padding(
                                     padding: MediaQuery.viewInsetsOf(context),
-                                    child: const SearchWidget(),
+                                    child: SearchWidget(),
                                   ),
                                 );
                               },
@@ -164,19 +179,27 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             0.0, 15.0, 15.0, 0.0),
                         child: Text(
                           '${getJsonField(
                             controlAPIGetColorsReportResponse.jsonBody,
                             r'''$.total_colors''',
-                          ).toString()} /${FFAppState().TotalTiendas}',
+                          ).toString()} / 300',
                           style:
                               FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Inter',
+                                    font: GoogleFonts.inter(
+                                      fontWeight: FontWeight.w900,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .bodyMedium
+                                          .fontStyle,
+                                    ),
                                     fontSize: 22.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w900,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .bodyMedium
+                                        .fontStyle,
                                   ),
                         ),
                       ),
@@ -196,7 +219,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 0.0),
                         child: FutureBuilder<ApiCallResponse>(
                           future: GetTiendaCall.call(
                             tiendanum: FFAppState().numeroTienda.toString(),
@@ -207,7 +230,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                             if (!snapshot.hasData) {
                               return Center(
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 250.0, 0.0, 0.0),
                                   child: SizedBox(
                                     width: 50.0,
@@ -246,19 +269,19 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                     scrollDirection: Axis.vertical,
                                     itemCount: itemsList.length,
                                     separatorBuilder: (_, __) =>
-                                        const SizedBox(height: 10.0),
+                                        SizedBox(height: 10.0),
                                     itemBuilder: (context, itemsListIndex) {
                                       final itemsListItem =
                                           itemsList[itemsListIndex];
                                       return Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             16.0, 0.0, 16.0, 8.0),
                                         child: Container(
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                             color: FlutterFlowTheme.of(context)
                                                 .secondaryBackground,
-                                            boxShadow: const [
+                                            boxShadow: [
                                               BoxShadow(
                                                 blurRadius: 3.0,
                                                 color: Color(0x411D2429),
@@ -272,14 +295,14 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                 BorderRadius.circular(8.0),
                                           ),
                                           child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: EdgeInsets.all(8.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
                                               children: [
                                                 Expanded(
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(8.0, 8.0,
                                                                 4.0, 0.0),
                                                     child: Column(
@@ -301,222 +324,29 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                   .of(context)
                                                               .headlineSmall
                                                               .override(
-                                                                fontFamily:
-                                                                    'Inter Tight',
+                                                                font: GoogleFonts
+                                                                    .interTight(
+                                                                  fontWeight: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .headlineSmall
+                                                                      .fontWeight,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .headlineSmall
+                                                                      .fontStyle,
+                                                                ),
                                                                 fontSize: 22.0,
                                                                 letterSpacing:
                                                                     0.0,
-                                                              ),
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                'SKU:',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
+                                                                fontWeight: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                getJsonField(
-                                                                  itemsListItem,
-                                                                  r'''$.SKU''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          70,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
+                                                                    .headlineSmall
+                                                                    .fontWeight,
+                                                                fontStyle: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
+                                                                    .headlineSmall
+                                                                    .fontStyle,
                                                               ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                'Depto:',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                getJsonField(
-                                                                  itemsListItem,
-                                                                  r'''$.Depto''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          70,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                'UPC:',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          0.0,
-                                                                          4.0,
-                                                                          8.0,
-                                                                          0.0),
-                                                              child:
-                                                                  AutoSizeText(
-                                                                getJsonField(
-                                                                  itemsListItem,
-                                                                  r'''$.UPC''',
-                                                                )
-                                                                    .toString()
-                                                                    .maybeHandleOverflow(
-                                                                      maxChars:
-                                                                          70,
-                                                                      replacement:
-                                                                          '…',
-                                                                    ),
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .start,
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Inter',
-                                                                      fontSize:
-                                                                          20.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ],
                                                         ),
                                                       ],
                                                     ),
@@ -528,7 +358,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -536,7 +366,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                   15.0),
                                                       child: FFButtonWidget(
                                                         onPressed: () async {
-                                                          var shouldSetState =
+                                                          var _shouldSetState =
                                                               false;
                                                           if (FFAppState()
                                                                   .Green ==
@@ -554,21 +384,20 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                               skuUpdate:
                                                                   getJsonField(
                                                                 itemsListItem,
-                                                                r'''$.SKU''',
+                                                                r'''$.Descrip''',
                                                               ).toString(),
                                                               colorUpdate: 3,
                                                             );
 
-                                                            shouldSetState =
+                                                            _shouldSetState =
                                                                 true;
                                                             if ((_model
                                                                     .apiResultbUpdate
                                                                     ?.succeeded ??
                                                                 true)) {
-                                                              if (shouldSetState) {
+                                                              if (_shouldSetState)
                                                                 safeSetState(
                                                                     () {});
-                                                              }
                                                               return;
                                                             }
                                                           } else {
@@ -582,28 +411,26 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                               skuUpdate:
                                                                   getJsonField(
                                                                 itemsListItem,
-                                                                r'''$.SKU''',
+                                                                r'''$.Descrip''',
                                                               ).toString(),
                                                               colorUpdate: 1,
                                                             );
 
-                                                            shouldSetState =
+                                                            _shouldSetState =
                                                                 true;
                                                             if ((_model
                                                                     .apiResultbUpdate2
                                                                     ?.succeeded ??
                                                                 true)) {
-                                                              if (shouldSetState) {
+                                                              if (_shouldSetState)
                                                                 safeSetState(
                                                                     () {});
-                                                              }
                                                               return;
                                                             }
                                                           }
 
-                                                          if (shouldSetState) {
+                                                          if (_shouldSetState)
                                                             safeSetState(() {});
-                                                          }
                                                         },
                                                         text: '',
                                                         options:
@@ -611,14 +438,14 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                           width: 40.0,
                                                           height: 40.0,
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
                                                                       0.0,
                                                                       0.0),
                                                           iconPadding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -630,7 +457,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                     itemsListItem,
                                                                     r'''$.color''',
                                                                   )
-                                                              ? const Color(
+                                                              ? Color(
                                                                   0xFF1EFF00)
                                                               : Colors.white,
                                                           textStyle:
@@ -638,8 +465,16 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                       context)
                                                                   .titleSmall
                                                                   .override(
-                                                                    fontFamily:
-                                                                        'Inter Tight',
+                                                                    font: GoogleFonts
+                                                                        .interTight(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .normal,
+                                                                      fontStyle: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .titleSmall
+                                                                          .fontStyle,
+                                                                    ),
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondary,
@@ -650,10 +485,14 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .normal,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .fontStyle,
                                                                   ),
                                                           elevation: 0.0,
                                                           borderSide:
-                                                              const BorderSide(
+                                                              BorderSide(
                                                             color: Colors.black,
                                                           ),
                                                           borderRadius:
@@ -665,7 +504,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                     ),
                                                     FFButtonWidget(
                                                       onPressed: () async {
-                                                        var shouldSetState =
+                                                        var _shouldSetState =
                                                             false;
                                                         if (FFAppState().Red ==
                                                             getJsonField(
@@ -682,21 +521,20 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                             skuUpdate:
                                                                 getJsonField(
                                                               itemsListItem,
-                                                              r'''$.SKU''',
+                                                              r'''$.Descrip''',
                                                             ).toString(),
                                                             colorUpdate: 3,
                                                           );
 
-                                                          shouldSetState =
+                                                          _shouldSetState =
                                                               true;
                                                           if ((_model
                                                                   .apiResultjvk
                                                                   ?.succeeded ??
                                                               true)) {
-                                                            if (shouldSetState) {
+                                                            if (_shouldSetState)
                                                               safeSetState(
                                                                   () {});
-                                                            }
                                                             return;
                                                           }
                                                         } else {
@@ -710,42 +548,40 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                             skuUpdate:
                                                                 getJsonField(
                                                               itemsListItem,
-                                                              r'''$.SKU''',
+                                                              r'''$.Descrip''',
                                                             ).toString(),
                                                             colorUpdate: 2,
                                                           );
 
-                                                          shouldSetState =
+                                                          _shouldSetState =
                                                               true;
                                                           if ((_model
                                                                   .apiResultjvk2
                                                                   ?.succeeded ??
                                                               true)) {
-                                                            if (shouldSetState) {
+                                                            if (_shouldSetState)
                                                               safeSetState(
                                                                   () {});
-                                                            }
                                                             return;
                                                           }
                                                         }
 
-                                                        if (shouldSetState) {
+                                                        if (_shouldSetState)
                                                           safeSetState(() {});
-                                                        }
                                                       },
                                                       text: '',
                                                       options: FFButtonOptions(
                                                         width: 40.0,
                                                         height: 40.0,
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -757,15 +593,23 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                   itemsListItem,
                                                                   r'''$.color''',
                                                                 )
-                                                            ? const Color(0xFFFF0000)
+                                                            ? Color(0xFFFF0000)
                                                             : Colors.white,
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
                                                                 .titleSmall
                                                                 .override(
-                                                                  fontFamily:
-                                                                      'Inter Tight',
+                                                                  font: GoogleFonts
+                                                                      .interTight(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .normal,
+                                                                    fontStyle: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .titleSmall
+                                                                        .fontStyle,
+                                                                  ),
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondary,
@@ -776,9 +620,13 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .normal,
+                                                                  fontStyle: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleSmall
+                                                                      .fontStyle,
                                                                 ),
                                                         elevation: 0.0,
-                                                        borderSide: const BorderSide(
+                                                        borderSide: BorderSide(
                                                           color: Colors.black,
                                                         ),
                                                         borderRadius:
@@ -806,7 +654,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 0.97),
+                  alignment: AlignmentDirectional(0.0, 0.97),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -827,7 +675,7 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                                 },
                                 child: Padding(
                                   padding: MediaQuery.viewInsetsOf(context),
-                                  child: const FinalizarReporteWidget(),
+                                  child: FinalizarReporteWidget(),
                                 ),
                               );
                             },
@@ -837,17 +685,25 @@ class _ControlAPIWidgetState extends State<ControlAPIWidget>
                         options: FFButtonOptions(
                           width: 150.0,
                           height: 50.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 0.0, 16.0, 0.0),
-                          iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                          iconPadding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 0.0),
                           color: FlutterFlowTheme.of(context).primary,
                           textStyle:
                               FlutterFlowTheme.of(context).titleSmall.override(
-                                    fontFamily: 'Inter Tight',
+                                    font: GoogleFonts.interTight(
+                                      fontWeight: FontWeight.w500,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleSmall
+                                          .fontStyle,
+                                    ),
                                     color: Colors.white,
                                     letterSpacing: 0.0,
                                     fontWeight: FontWeight.w500,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleSmall
+                                        .fontStyle,
                                   ),
                           elevation: 0.0,
                           borderRadius: BorderRadius.circular(8.0),

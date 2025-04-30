@@ -41,7 +41,7 @@ class FFAppState extends ChangeNotifier {
     prefs.setString('ff_contrasea', value);
   }
 
-  String _Cpunt = '1';
+  String _Cpunt = '';
   String get Cpunt => _Cpunt;
   set Cpunt(String value) {
     _Cpunt = value;

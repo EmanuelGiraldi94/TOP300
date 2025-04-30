@@ -16,7 +16,7 @@ class GetTiendaCall {
     return ApiManager.instance.makeApiCall(
       callName: 'GetTienda',
       apiUrl:
-          'http://186.182.243.208:3000/top300?tienda=$tiendanum&depto=$deptonum',
+          'http://186.182.243.208:3000/top300/descripciones?tienda=${tiendanum}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -69,12 +69,12 @@ class UpdatecolorCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "color": $colorUpdate
+  "color": ${colorUpdate}
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'updatecolor',
       apiUrl:
-          'http://186.182.243.208:3000/update-color/$skuUpdate/$tiendaUpdate',
+          'http://186.182.243.208:3000/update-color/${skuUpdate}/${tiendaUpdate}',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},
@@ -98,7 +98,7 @@ class ContarCall {
     return ApiManager.instance.makeApiCall(
       callName: 'Contar',
       apiUrl:
-          'http://186.182.243.208:3000/count-items/$tiendacount?depto=$deptocount',
+          'http://186.182.243.208:3000/count-items/${tiendacount}?depto=${deptocount}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -131,7 +131,7 @@ class CreateRerpotCall {
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'CreateRerpot',
-      apiUrl: 'http://186.182.243.208:3000/reportes$tienda',
+      apiUrl: 'http://186.182.243.208:3000/reportes${tienda}',
       callType: ApiCallType.POST,
       headers: {},
       params: {},
@@ -153,7 +153,7 @@ class GetReportesCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'GetReportes',
-      apiUrl: 'http://186.182.243.208:3000/reportes$tiendaGR',
+      apiUrl: 'http://186.182.243.208:3000/reportes${tiendaGR}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -216,14 +216,14 @@ class UpdateReporteCall {
     final ffApiRequestBody = '''
 {
   "estadoNuevo": "${escapeStringForJson(estadoR)}",
-  "cantidadItem": $itemR,
-  "rojos": $rojoR,
-  "verdes": $verdeR,
+  "cantidadItem": ${itemR},
+  "rojos": ${rojoR},
+  "verdes": ${verdeR},
   "fechaFinalizacion": "${escapeStringForJson(fechaFR)}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'UpdateReporte',
-      apiUrl: 'http://186.182.243.208:3000/reportes/$tiendaR/$fechaR',
+      apiUrl: 'http://186.182.243.208:3000/reportes/${tiendaR}/${fechaR}',
       callType: ApiCallType.PUT,
       headers: {},
       params: {},
@@ -246,7 +246,7 @@ class GetColorsReportCall {
     return ApiManager.instance.makeApiCall(
       callName: 'GetColorsReport',
       apiUrl:
-          'http://186.182.243.208:3000/count-color-values/$tiendacolor/reportes$tiendacolor',
+          'http://186.182.243.208:3000/count-color-values/${tiendacolor}/reportes${tiendacolor}',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -311,7 +311,7 @@ class GetBooleanReportCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'GetBooleanReport',
-      apiUrl: 'http://186.182.243.208:3000/reportes$tiendaBoolean/enProceso',
+      apiUrl: 'http://186.182.243.208:3000/reportes${tiendaBoolean}/enProceso',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -328,6 +328,26 @@ class GetBooleanReportCall {
         response,
         r'''$.enProceso''',
       ));
+}
+
+class DeleteColorosTiendasCall {
+  static Future<ApiCallResponse> call({
+    String? tienda = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'DeleteColorosTiendas',
+      apiUrl: 'http://186.182.243.208:3000/delete-colores/${tienda}',
+      callType: ApiCallType.DELETE,
+      headers: {},
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: false,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
 }
 
 class ApiPagingParams {
